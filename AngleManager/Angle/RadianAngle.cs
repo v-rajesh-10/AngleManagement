@@ -89,11 +89,26 @@ namespace AngleManager.Angle
         {
             return new RadianAngle(this.Value / angleValue);
         }
+
+        public override int CompareTo(Angle angle)
+        {
+            double angleValue = angle.Value;
+            if (!IsSameUnit(angle))
+            {
+                angleValue = ConvertToRadian(angle.Value);
+            }
+            return this.Value.CompareTo(angleValue);
+        }
         #endregion
 
-        public override bool Equals(object obj)
+        public override bool Equals(Angle other)
         {
-            return base.Equals(obj);
+            double otherValue = other.Value;
+            if (!IsSameUnit(other))
+            {
+                otherValue = ConvertToRadian(other.Value);
+            }
+            return this.Value.Equals(otherValue);
         }
         public override int GetHashCode()
         {

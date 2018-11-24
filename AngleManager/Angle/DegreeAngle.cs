@@ -82,28 +82,41 @@ namespace AngleManager.Angle
             {
                 divideDegreeValue = ConvertToDegree(angle.Value);
             }
-            if (this.Value <= 0 || angle.Value <= 0)
-            {
-                throw new InvalidOperationException("The angle degree value is not in the range for division.");
-            }
             return Divide(divideDegreeValue);
         }
 
         public override Angle Divide(double angleValue)
         {
+            if (this.Value <= 0 || angleValue <= 0)
+            {
+                throw new InvalidOperationException("The angle degree value is not in the range for division.");
+            }
             return new DegreeAngle(this.Value / angleValue);
+        }
+
+        public override int CompareTo(Angle angle)
+        {
+            double angleValue = angle.Value;
+            if (!IsSameUnit(angle))
+            {
+                angleValue = ConvertToDegree(angle.Value);
+            }
+            return this.Value.CompareTo(angleValue);
         }
         #endregion
 
-        public override bool Equals(object obj)
+        public override bool Equals(Angle other)
         {
-            return base.Equals(obj);
+            double otherValue = other.Value;
+            if (!IsSameUnit(other))
+            {
+                otherValue = ConvertToDegree(other.Value);
+            }
+            return (0 == this.Value.CompareTo(otherValue));
         }
-
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
-
     }
 }

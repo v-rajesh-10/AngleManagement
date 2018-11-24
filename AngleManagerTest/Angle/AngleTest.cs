@@ -238,13 +238,24 @@ namespace AngleManagerTest.Angle
         }
 
         [TestMethod]
-        public void DivisionAngleWithFirstAngleInDoubleAndSecondAngleInRadians()
+        public void DivisionAngleWithFirstAngleInDegreesAndSecondAngleInDouble()
         {
             // Act
-            var result = 5 / CreateRadianAngleByValue(5);
+            var result = CreateDegreeAngleByValue(5) / 5;
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.Value.ShouldBe(1);
+        }
+
+        [TestMethod]
+        public void DivisionAngleWithFirstAngleInDoubleAndSecondAngleInDegrees()
+        {
+            // Act
+            var result =  5 / CreateDegreeAngleByValue(5);
+
+            // Assert
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
             result.Value.ShouldBe(1);
         }
 
@@ -275,6 +286,17 @@ namespace AngleManagerTest.Angle
         {
             // Act
             var result = CreateRadianAngleByValue(5) / 5;
+
+            // Assert
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(1);
+        }
+
+        [TestMethod]
+        public void DivisionAngleWithFirstAngleInDoubleAndSecondAngleInRadian()
+        {
+            // Act
+            var result = 5 / CreateRadianAngleByValue(5);
 
             // Assert
             result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
@@ -319,6 +341,169 @@ namespace AngleManagerTest.Angle
         {
             // Arrange and Act
             var result = 0 / CreateRadianAngleByValue(1);
+        }
+
+        #endregion
+
+        #region Comparison Tests
+        [TestMethod]
+        public void FirstAngleInDegreesEqualToSecondAngleInDegrees()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(5) == CreateDegreeAngleByValue(5);
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInDegreesEqualToSecondAngleInRadian()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(5) == CreateRadianAngleByValue(AngleManager.Angle.Angle.ConvertToRadian(5));
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInRadianEqualToSecondAngleInDegrees()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(5) == CreateDegreeAngleByValue(AngleManager.Angle.Angle.ConvertToDegree(5));
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInRadianEqualToSecondAngleInRadian()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(5) == CreateRadianAngleByValue(5);
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInDegreesNotEqualToSecondAngleInDegrees()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(5) != CreateDegreeAngleByValue(6);
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInDegreesNotEqualToSecondAngleInRadian()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(5) != CreateRadianAngleByValue(AngleManager.Angle.Angle.ConvertToRadian(6));
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInRadianNotEqualToSecondAngleInDegrees()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(5) != CreateDegreeAngleByValue(AngleManager.Angle.Angle.ConvertToDegree(6));
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInRadianNotEqualToSecondAngleInRadian()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(5) != CreateRadianAngleByValue(6);
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInDegreesGreaterThanSecondAngleInDegrees()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(5) > CreateDegreeAngleByValue(4);
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInDegreesGreaterThanSecondAngleInRadian()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(5) > CreateRadianAngleByValue(AngleManager.Angle.Angle.ConvertToRadian(4));
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInRadianGreaterThanSecondAngleInDegrees()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(5) > CreateDegreeAngleByValue(AngleManager.Angle.Angle.ConvertToDegree(4));
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInRadianGreaterThanSecondAngleInRadian()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(5) > CreateRadianAngleByValue(4);
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInDegreesLesserThanSecondAngleInDegrees()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(5) < CreateDegreeAngleByValue(6);
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInDegreesLesserThanSecondAngleInRadian()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(5) < CreateRadianAngleByValue(AngleManager.Angle.Angle.ConvertToRadian(6));
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInRadianLesserThanSecondAngleInDegrees()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(5) < CreateDegreeAngleByValue(AngleManager.Angle.Angle.ConvertToDegree(6));
+
+            // Assert
+            result.ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void FirstAngleInRadianLesserThanSecondAngleInRadian()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(5) < CreateRadianAngleByValue(6);
+
+            // Assert
+            result.ShouldBeTrue();
         }
 
         #endregion

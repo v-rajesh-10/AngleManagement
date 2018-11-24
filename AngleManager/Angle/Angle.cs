@@ -7,7 +7,7 @@ namespace AngleManager.Angle
     /// <summary>
     /// Represents an Angle in the system.
     /// </summary>
-    public abstract class Angle
+    public abstract class Angle : IEquatable<Angle>
     {
         public static readonly double ANGLE_VALUE_LOWER_LIMIT = 0;
         /// the value of the angle
@@ -82,6 +82,39 @@ namespace AngleManager.Angle
         /// <param name="angle">the angle to the divided</param>
         /// <returns>new instance of angle with value divided represented by <code>Angle</code></returns>
         public abstract Angle Divide(double angleValue);
+
+        /// <summary>
+        /// Compare the angle from an existing instance
+        /// </summary>
+        /// <param name="angle">the angle to the compared</param>
+        /// <returns>Positive if the angle is greater and Negative otherwise</returns>
+        public abstract int CompareTo(Angle angle);
+
+        #endregion
+
+        #region Base Comparison Implementation
+        public override bool Equals(object obj)
+        {
+            Angle angle = obj as Angle;
+            if (angle != null)
+            {
+                return false;
+            }
+            return Equals(angle);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1571931217;
+            hashCode = hashCode * -1521134295 + _value.GetHashCode();
+            return hashCode;
+        }
+
+        public virtual bool Equals(Angle other)
+        {
+            return true;
+        }
+
         #endregion
 
         #region Angle Operations
@@ -120,9 +153,37 @@ namespace AngleManager.Angle
             return firstAngle.Divide(secondValue);
         }
 
-        public static Angle operator /(double firstValue, Angle secondAngle)
+        public static Angle operator/ (double firstValue, Angle secondAngle)
         {
             return secondAngle.Divide(firstValue);
+        }
+
+        public static bool operator== (Angle firstAngle, Angle secondAngle)
+        {
+            if (object.ReferenceEquals(firstAngle, secondAngle)) return true;
+            if (object.ReferenceEquals(firstAngle, null)) return false;
+            if (object.ReferenceEquals(secondAngle, null)) return false;
+
+            return firstAngle.Equals(secondAngle);
+        }
+
+        public static bool operator!= (Angle firstAngle, Angle secondAngle)
+        {
+            if (object.ReferenceEquals(firstAngle, secondAngle)) return false;
+            if (object.ReferenceEquals(firstAngle, null)) return true;
+            if (object.ReferenceEquals(secondAngle, null)) return true;
+
+            return !firstAngle.Equals(secondAngle);
+        }
+
+        public static bool operator< (Angle firstAngle, Angle secondAngle)
+        {
+            return (0 > firstAngle.CompareTo(secondAngle));
+        }
+
+        public static bool operator> (Angle firstAngle, Angle secondAngle)
+        {
+            return (0 < firstAngle.CompareTo(secondAngle));
         }
         #endregion
 
