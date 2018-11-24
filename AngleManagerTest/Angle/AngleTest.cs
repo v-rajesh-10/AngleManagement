@@ -8,83 +8,49 @@ namespace AngleManagerTest.Angle
     [TestClass]
     public class AngleTest
     {
-        private static AngleManager.Angle.Angle _ValidDegreeAngle = null;
-        private static AngleManager.Angle.Angle _ValidRadianAngle = null;
-        private static double _ExpectedAddResultInDegrees;
-        private static double _ExpectedAddResultInRadians;
-        private static double _ExpectedDifferenceResultInDegrees;
-        private static double _ExpectedDifferenceResultInRadians;
-        private static double _ExpectedMultiplicationResultInDegrees;
-        private static double _ExpectedMultiplicationResultInRadians;
-        private static double _ExpectedDivisionResultInDegrees;
-        private static double _ExpectedDivisionResultInRadians;
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            _ValidDegreeAngle = CreateDegreeAngleByValue(10);
-            _ValidRadianAngle = CreateRadianAngleByValue(5);
-
-            _ExpectedAddResultInDegrees = _ValidDegreeAngle.Value + ((180 / Math.PI) * _ValidRadianAngle.Value);
-
-            _ExpectedAddResultInRadians = _ValidRadianAngle.Value + ((Math.PI / 180) * _ValidDegreeAngle.Value);
-
-            _ExpectedDifferenceResultInDegrees = _ValidDegreeAngle.Value - ((180 / Math.PI) * _ValidRadianAngle.Value);
-
-            _ExpectedDifferenceResultInRadians = _ValidRadianAngle.Value - ((Math.PI / 180) * _ValidDegreeAngle.Value);
-
-            _ExpectedMultiplicationResultInDegrees = _ValidDegreeAngle.Value * ((180 / Math.PI) * _ValidRadianAngle.Value);
-
-            _ExpectedMultiplicationResultInRadians = _ValidRadianAngle.Value * ((Math.PI / 180) * _ValidDegreeAngle.Value);
-
-            _ExpectedDivisionResultInDegrees = _ValidDegreeAngle.Value / ((180 / Math.PI) * _ValidRadianAngle.Value);
-
-            _ExpectedDivisionResultInRadians = _ValidRadianAngle.Value / ((Math.PI / 180) * _ValidDegreeAngle.Value);
-        }
-
         #region Angle Addition Tests
         [TestMethod]
         public void TestAddAngleWithFirstAngleInDegreesAndSecondAngleInDegrees()
         {
             // Act
-            var result = _ValidDegreeAngle + _ValidDegreeAngle;
+            var result = CreateDegreeAngleByValue(10) + CreateDegreeAngleByValue(5);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.DEGREE);
-            result.Value.ShouldBe(_ValidDegreeAngle.Value * 2);
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.Value.ShouldBe(15);
         }
 
         [TestMethod]
         public void TestAddAngleWithFirstAngleInDegreesAndSecondAngleInRadians()
         {
             // Act
-            var result = _ValidDegreeAngle + _ValidRadianAngle;
+            var result = CreateDegreeAngleByValue(5) + CreateRadianAngleByValue(1);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.DEGREE);
-            result.Value.ShouldBe(_ExpectedAddResultInDegrees);
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.Value.ShouldBe(5 + AngleManager.Angle.Angle.ConvertToDegree(1));
         }
 
         [TestMethod]
         public void TestAddAngleWithFirstAngleInRadianAndSecondAngleInDegrees()
         {
             // Act
-            var result = _ValidRadianAngle + _ValidDegreeAngle;
+            var result = CreateRadianAngleByValue(5) + CreateDegreeAngleByValue(10);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.RADIAN);
-            result.Value.ShouldBe(_ExpectedAddResultInRadians);
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(5 + AngleManager.Angle.Angle.ConvertToRadian(10));
         }
 
         [TestMethod]
         public void TestAddAngleWithFirstAngleInRadianAndSecondAngleInRadians()
         {
             // Act
-            var result = _ValidRadianAngle + _ValidRadianAngle;
+            var result = CreateRadianAngleByValue(5) + CreateRadianAngleByValue(1);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.RADIAN);
-            result.Value.ShouldBe(_ValidRadianAngle.Value * 2);
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(6);
         }
 
         [TestMethod]
@@ -101,10 +67,10 @@ namespace AngleManagerTest.Angle
         public void SubtractAngleWithFirstAngleInDegreesAndSecondAngleInDegrees()
         {
             // Act
-            var result = _ValidDegreeAngle - _ValidDegreeAngle;
+            var result = CreateDegreeAngleByValue(5) - CreateDegreeAngleByValue(5);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.DEGREE);
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
             result.Value.ShouldBe(0);
         }
 
@@ -112,32 +78,32 @@ namespace AngleManagerTest.Angle
         public void SubtractAngleWithFirstAngleInDegreesAndSecondAngleInRadians()
         {
             // Act
-            var result = CreateDegreeAngleByValue(360) - _ValidRadianAngle;
+            var result = CreateDegreeAngleByValue(360) - CreateRadianAngleByValue(5);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.DEGREE);
-            result.Value.ShouldBe(360 - ((180 / Math.PI) * _ValidRadianAngle.Value));
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.Value.ShouldBe(360 - AngleManager.Angle.Angle.ConvertToDegree(5));
         }
 
         [TestMethod]
         public void SubtractAngleWithFirstAngleInRadianAndSecondAngleInDegrees()
         {
             // Act
-            var result = _ValidRadianAngle - _ValidDegreeAngle;
+            var result = CreateRadianAngleByValue(5) - CreateDegreeAngleByValue(10);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.RADIAN);
-            result.Value.ShouldBe(_ExpectedDifferenceResultInRadians);
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(5 - AngleManager.Angle.Angle.ConvertToRadian(10));
         }
 
         [TestMethod]
         public void SubtractAngleWithFirstAngleInRadianAndSecondAngleInRadians()
         {
             // Act
-            var result = _ValidRadianAngle - _ValidRadianAngle;
+            var result = CreateRadianAngleByValue(6) - CreateRadianAngleByValue(6);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.RADIAN);
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
             result.Value.ShouldBe(0);
         }
 
@@ -155,88 +121,88 @@ namespace AngleManagerTest.Angle
         public void MultiplyAngleWithFirstAngleInDegreesAndSecondAngleInDegrees()
         {
             // Act
-            AngleManager.Angle.Angle result = _ValidDegreeAngle * _ValidDegreeAngle;
+            var result = CreateDegreeAngleByValue(10) * CreateDegreeAngleByValue(5);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.DEGREE);
-            result.Value.ShouldBe(_ValidDegreeAngle.Value * _ValidDegreeAngle.Value);
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.Value.ShouldBe(50);
         }
 
         [TestMethod]
         public void MultiplyAngleWithFirstAngleInDegreesAndSecondAngleInRadians()
         {
             // Act
-            var result = _ValidDegreeAngle * CreateRadianAngleByValue(0.50);
+            var result = CreateDegreeAngleByValue(10) * CreateRadianAngleByValue(0.50);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.DEGREE);
-            result.Value.ShouldBe(_ValidDegreeAngle.Value * ((180 / Math.PI) * 0.50));
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.Value.ShouldBe(10 * AngleManager.Angle.Angle.ConvertToDegree(0.50));
         }
 
         [TestMethod]
         public void MultiplyAngleWithFirstAngleInDegreesAndSecondAngleInDouble()
         {
             // Act
-            var result = _ValidDegreeAngle * _ValidDegreeAngle.Value;
+            var result = CreateDegreeAngleByValue(10) * 5;
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.DEGREE);
-            result.Value.ShouldBe(_ValidDegreeAngle.Value * _ValidDegreeAngle.Value);
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.Value.ShouldBe(50);
         }
 
         [TestMethod]
         public void MultiplyAngleWithFirstAngleInDoubleAndSecondAngleInDegrees()
         {
             // Act
-            var result = _ValidDegreeAngle.Value * _ValidDegreeAngle;
+            var result = 5 * CreateDegreeAngleByValue(10);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.DEGREE);
-            result.Value.ShouldBe(_ValidDegreeAngle.Value * _ValidDegreeAngle.Value);
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.Value.ShouldBe(50);
         }
 
         [TestMethod]
         public void MultiplyAngleWithFirstAngleInRadianAndSecondAngleInDegrees()
         {
             // Act
-            var result = _ValidRadianAngle * _ValidDegreeAngle;
+            var result = CreateRadianAngleByValue(2) * CreateDegreeAngleByValue(2);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.RADIAN);
-            result.Value.ShouldBe(_ExpectedMultiplicationResultInRadians);
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(2 * AngleManager.Angle.Angle.ConvertToRadian(2));
         }
 
         [TestMethod]
         public void MultiplyAngleWithFirstAngleInRadianAndSecondAngleInRadians()
         {
             // Act
-            var result = _ValidRadianAngle * _ValidRadianAngle;
+            var result = CreateRadianAngleByValue(2) * CreateRadianAngleByValue(3);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.RADIAN);
-            result.Value.ShouldBe(_ValidRadianAngle.Value * _ValidRadianAngle.Value);
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(6);
         }
 
         [TestMethod]
         public void MultiplyAngleWithFirstAngleInRadianAndSecondAngleInDouble()
         {
             // Act
-            var result = _ValidRadianAngle * _ValidRadianAngle.Value;
+            var result = CreateRadianAngleByValue(2) * 3;
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.RADIAN);
-            result.Value.ShouldBe(_ValidRadianAngle.Value * _ValidRadianAngle.Value);
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(6);
         }
 
         [TestMethod]
         public void MultiplyAngleWithFirstAngleInDoubleAndSecondAngleInRadian()
         {
             // Act
-            var result = _ValidRadianAngle.Value * _ValidRadianAngle;
+            var result = 2 * CreateRadianAngleByValue(3);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.RADIAN);
-            result.Value.ShouldBe(_ValidRadianAngle.Value * _ValidRadianAngle.Value);
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(6);
         }
 
         [TestMethod]
@@ -253,44 +219,66 @@ namespace AngleManagerTest.Angle
         public void DivisionAngleWithFirstAngleInDegreesAndSecondAngleInDegrees()
         {
             // Act
-            var result = _ValidDegreeAngle / _ValidDegreeAngle;
+            var result = CreateDegreeAngleByValue(5) / CreateDegreeAngleByValue(5);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.DEGREE);
-            result.Value.ShouldBe(_ValidDegreeAngle.Value / _ValidDegreeAngle.Value);
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.Value.ShouldBe(1);
         }
 
         [TestMethod]
         public void DivisionAngleWithFirstAngleInDegreesAndSecondAngleInRadians()
         {
             // Act
-            var result = _ValidDegreeAngle / CreateRadianAngleByValue(0.50);
+            var result = CreateDegreeAngleByValue(5) / CreateRadianAngleByValue(0.50);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.DEGREE);
-            result.Value.ShouldBe(_ValidDegreeAngle.Value / ((180 / Math.PI) * 0.50));
+            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.Value.ShouldBe(5 / AngleManager.Angle.Angle.ConvertToDegree(0.50));
+        }
+
+        [TestMethod]
+        public void DivisionAngleWithFirstAngleInDoubleAndSecondAngleInRadians()
+        {
+            // Act
+            var result = 5 / CreateRadianAngleByValue(5);
+
+            // Assert
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(1);
         }
 
         [TestMethod]
         public void DivisionAngleWithFirstAngleInRadianAndSecondAngleInDegrees()
         {
             // Act
-            var result = _ValidRadianAngle / _ValidDegreeAngle;
+            var result = CreateRadianAngleByValue(5) / CreateDegreeAngleByValue(100);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.RADIAN);
-            result.Value.ShouldBe(_ExpectedDivisionResultInRadians);
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(5 / AngleManager.Angle.Angle.ConvertToRadian(100));
         }
 
         [TestMethod]
         public void DivisionAngleWithFirstAngleInRadianAndSecondAngleInRadians()
         {
             // Act
-            var result = _ValidRadianAngle / _ValidRadianAngle;
+            var result = CreateRadianAngleByValue(5) / CreateRadianAngleByValue(5);
 
             // Assert
-            result.Unit.ShouldBe(AngleManager.Angle.AngularUnits.UnitType.RADIAN);
-            result.Value.ShouldBe(_ValidRadianAngle.Value / _ValidRadianAngle.Value);
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(1);
+        }
+
+        [TestMethod]
+        public void DivisionAngleWithFirstAngleInRadianAndSecondAngleInDouble()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(5) / 5;
+
+            // Assert
+            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Value.ShouldBe(1);
         }
 
         [TestMethod]
@@ -300,16 +288,49 @@ namespace AngleManagerTest.Angle
             // Arrange and Act
             var result = CreateDegreeAngleByValue(1000) / CreateDegreeAngleByValue(1) / CreateDegreeAngleByValue(2);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "The angle degree value is not in the range for division.")]
+        public void DivisionAngleWithFirstAngleInDegreesZeroAndSecondAngleInDegreesThrowsException()
+        {
+            // Arrange and Act
+            var result = CreateDegreeAngleByValue(0) / CreateDegreeAngleByValue(1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "The angle degree value is not in the range for division.")]
+        public void DivisionAngleWithFirstAngleInRadiansZeroAndSecondAngleInDegreesThrowsException()
+        {
+            // Arrange and Act
+            var result = CreateRadianAngleByValue(0) / CreateDegreeAngleByValue(1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "The angle degree value is not in the range for division.")]
+        public void DivisionAngleWithFirstAngleZeroAndSecondAngleInDegreesThrowsException()
+        {
+            // Arrange and Act
+            var result = 0 / CreateDegreeAngleByValue(1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "The angle degree value is not in the range for division.")]
+        public void DivisionAngleWithFirstAngleZeroAndSecondAngleInRadianThrowsException()
+        {
+            // Arrange and Act
+            var result = 0 / CreateRadianAngleByValue(1);
+        }
+
         #endregion
 
         private AngleManager.Angle.Angle CreateDegreeAngleByValue(double value)
         {
-            return AngleManager.Angle.AngleBuilder.Create().WithValue(value).WithUnit(ConfigurationManager.AppSettings["AngularUnitTypeDegree"]).Build();
+            return new AngleManager.Angle.DegreeAngle(value);
         }
 
         private AngleManager.Angle.Angle CreateRadianAngleByValue(double value)
         {
-            return AngleManager.Angle.AngleBuilder.Create().WithValue(value).WithUnit(ConfigurationManager.AppSettings["AngularUnitTypeRadian"]).Build();
+            return new AngleManager.Angle.RadianAngle(value);
         }
     }
 }

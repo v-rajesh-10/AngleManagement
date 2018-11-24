@@ -54,7 +54,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Angle\AngleBuilderTest.cs" />
     <Compile Include="Angle\AngleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

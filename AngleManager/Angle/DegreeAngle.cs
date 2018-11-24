@@ -1,41 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static AngleManager.Angle.AngularUnits;
 
 namespace AngleManager.Angle
 {
     /// <summary>
     /// Represents the Degree Angle which extends the Angle base class exposed to the consumer
     /// </summary>
-    internal sealed class DegreeAngle : Angle
+    public class DegreeAngle : Angle
     {
-        private static readonly UnitType DEGREE_TYPE = UnitType.DEGREE;
+        public static readonly double DEGREE_VALUE_UPPER_LIMIT = 360;
 
         #region DegreeAngle construction
 
         /// <summary>
-        /// Constructor declared internal to prevent direct instantiation by external consumers outside the assembly
+        /// Creates an instance of Radian Angle based on the provided value
         /// </summary>
         /// <param name="value">the value of the angle</param>
-        /// <exception cref="InvalidOperationException"></exception>
-        internal DegreeAngle(double value)
+        /// <exception cref="InvalidOperationException">value not in range of 0 to 360</exception>
+        public DegreeAngle(double value)
         {
             Value = value;
-            Unit = DEGREE_TYPE;
-            Validate();
+            if (!IsValid())
+            {
+                throw new InvalidOperationException("The degree angle value is not in the expected range[ " + ANGLE_VALUE_LOWER_LIMIT + ", " + DEGREE_VALUE_UPPER_LIMIT + " ].");
+            }
         }
 
         #endregion
 
         #region Override IAngleOperations
 
+        public override bool IsValid()
+        {
+            if (Value >= ANGLE_VALUE_LOWER_LIMIT && Value <= DEGREE_VALUE_UPPER_LIMIT)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public override Angle Sum(Angle angle)
         {
             double addDegreeValue = angle.Value;
-            if (!IsUnitTypeSame(angle))
+            if (!IsSameUnit(angle))
             {
-                addDegreeValue = ConvertorsUtil.RadianToDegree(angle.Value);
+                addDegreeValue = ConvertToDegree(angle.Value);
             }
             return new DegreeAngle(this.Value + addDegreeValue);
         }
@@ -43,9 +53,9 @@ namespace AngleManager.Angle
         public override Angle Difference(Angle angle)
         {
             double subtractDegreeValue = angle.Value;
-            if (!IsUnitTypeSame(angle))
+            if (!IsSameUnit(angle))
             {
-                subtractDegreeValue = ConvertorsUtil.RadianToDegree(angle.Value);
+                subtractDegreeValue = ConvertToDegree(angle.Value);
             }
             return new DegreeAngle(this.Value - subtractDegreeValue);
         }
@@ -53,9 +63,9 @@ namespace AngleManager.Angle
         public override Angle Multiply(Angle angle)
         {
             double multiplyDegreeValue = angle.Value;
-            if (!IsUnitTypeSame(angle))
+            if (!IsSameUnit(angle))
             {
-                multiplyDegreeValue = ConvertorsUtil.RadianToDegree(angle.Value);
+                multiplyDegreeValue = ConvertToDegree(angle.Value);
             }
             return Multiply(multiplyDegreeValue);
         }
@@ -68,9 +78,9 @@ namespace AngleManager.Angle
         public override Angle Divide(Angle angle)
         {
             double divideDegreeValue = angle.Value;
-            if (!IsUnitTypeSame(angle))
+            if (!IsSameUnit(angle))
             {
-                divideDegreeValue = ConvertorsUtil.RadianToDegree(angle.Value);
+                divideDegreeValue = ConvertToDegree(angle.Value);
             }
             if (this.Value <= 0 || angle.Value <= 0)
             {
@@ -85,11 +95,6 @@ namespace AngleManager.Angle
         }
         #endregion
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-
         public override bool Equals(object obj)
         {
             return base.Equals(obj);
@@ -99,5 +104,6 @@ namespace AngleManager.Angle
         {
             return base.GetHashCode();
         }
+
     }
 }

@@ -1,38 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static AngleManager.Angle.AngularUnits;
 
 namespace AngleManager.Angle
 {
-    internal sealed class RadianAngle : Angle
+    public class RadianAngle : Angle
     {
-        private static readonly UnitType RADIAN_TYPE = UnitType.RADIAN;
-        
+        private static readonly double RADIAN_UPPER_LIMIT = ConvertToRadian(DegreeAngle.DEGREE_VALUE_UPPER_LIMIT);
         #region RadianAngle construction
 
         /// <summary>
-        /// Constructor declared internal to prevent direct instantiation by external consumers outside the assembly
+        /// Creates an instance of Radian Angle based on the provided value
         /// </summary>
         /// <param name="value">the value of the angle</param>
-        /// <exception cref="InvalidOperationException"></exception>
-        internal RadianAngle(double value)
+        /// <exception cref="InvalidOperationException">value not in range of 0 to 360</exception>
+        public RadianAngle(double value)
         {
             Value = value;
-            Unit = RADIAN_TYPE;
-            Validate();
+            if (!IsValid())
+            {
+                throw new InvalidOperationException("The radian angle value is not in the expected range[ " + ANGLE_VALUE_LOWER_LIMIT + ", " + RADIAN_UPPER_LIMIT + " ].");
+            }
         }
 
         #endregion
 
         #region Override IAngleOperations
 
+        public override bool IsValid()
+        {
+            if (Value >= ANGLE_VALUE_LOWER_LIMIT && Value <= RADIAN_UPPER_LIMIT)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public override Angle Sum(Angle angle)
         {
             double addRadianValue = angle.Value;
-            if (!IsUnitTypeSame(angle))
+            if (!IsSameUnit(angle))
             {
-                addRadianValue = ConvertorsUtil.DegreeToRadian(angle.Value);
+                addRadianValue = ConvertToRadian(angle.Value);
             }
             return new RadianAngle(this.Value + addRadianValue);
         }
@@ -40,9 +49,9 @@ namespace AngleManager.Angle
         public override Angle Difference(Angle angle)
         {
             double subtractRadianValue = angle.Value;
-            if (!IsUnitTypeSame(angle))
+            if (!IsSameUnit(angle))
             {
-                subtractRadianValue = ConvertorsUtil.DegreeToRadian(angle.Value);
+                subtractRadianValue = ConvertToRadian(angle.Value);
             }
             return new RadianAngle(this.Value - subtractRadianValue);
         }
@@ -50,9 +59,9 @@ namespace AngleManager.Angle
         public override Angle Multiply(Angle angle)
         {
             double multiplyRadianValue = angle.Value;
-            if (!IsUnitTypeSame(angle))
+            if (!IsSameUnit(angle))
             {
-                multiplyRadianValue = ConvertorsUtil.DegreeToRadian(angle.Value);
+                multiplyRadianValue = ConvertToRadian(angle.Value);
             }
             return Multiply(multiplyRadianValue);
         }
@@ -65,9 +74,9 @@ namespace AngleManager.Angle
         public override Angle Divide(Angle angle)
         {
             double divideRadianValue = angle.Value;
-            if (!IsUnitTypeSame(angle))
+            if (!IsSameUnit(angle))
             {
-                divideRadianValue = ConvertorsUtil.DegreeToRadian(angle.Value);
+                divideRadianValue = ConvertToRadian(angle.Value);
             }
             if (this.Value <= 0 || angle.Value <= 0)
             {
@@ -90,10 +99,5 @@ namespace AngleManager.Angle
         {
             return base.GetHashCode();
         }
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-
     }
 }

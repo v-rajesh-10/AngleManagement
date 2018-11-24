@@ -1,63 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static AngleManager.Angle.AngularUnits;
 
 namespace AngleManager.Angle
 {
     /// <summary>
     /// Represents an Angle in the system.
     /// </summary>
-    public abstract class Angle : IBasicOperations
+    public abstract class Angle
     {
-        private static readonly double VALUE_LOWER_LIMIT = 0;
-        private static readonly double VALUE_UPPER_LIMIT = 360;
-
+        public static readonly double ANGLE_VALUE_LOWER_LIMIT = 0;
         /// the value of the angle
         private double _value;
 
-        /// the angular unit reprsented by <code>Unit</code>
-        private UnitType _unit;
-
         public double Value { get => _value; protected set => _value = value; }
-        public UnitType Unit { get => _unit; protected set => _unit = value; }
 
-        #region Angle Builder and Validation
+        #region Angle Common Impmentation For Derived Classes
+        public static double ConvertToRadian(double degreeValue)
+        {
+            return ((Math.PI / 180) * degreeValue);
+        }
+
+        public static double ConvertToDegree(double radianValue)
+        {
+            return ((180 / Math.PI) * radianValue);
+        }
+
+        protected bool IsSameUnit(Angle targetAngle)
+        {
+            return GetType().Equals(targetAngle.GetType());
+        }
+
+        #endregion
+
+        #region Angle Overrides
 
         /// <summary>
-        /// Builds the Agent Builder which can be directly invoked by the consumer using a builder pattern.
-        /// <seealso cref="AngleBuilder"/>
+        /// Validates the Angle Instance 
         /// </summary>
-        /// <returns>the builder instance represented by <code>AngleBuilder</code></returns>
-        public static AngleBuilder Builder()
-        {
-            return AngleBuilder.Create();
-        }
+        /// <returns>true if the instance is valid, false otherwise</returns>
+        public abstract bool IsValid();
 
+        /// <summary>
+        /// Adds the angle to an existing instance.
+        /// </summary>
+        /// <param name="angle">the angle to the added</param>
+        /// <returns>new instance of angle with values added represented by <code>Angle</code></returns>
         public abstract Angle Sum(Angle angle);
 
+        /// <summary>
+        /// Subtract the angle from an existing instance.
+        /// </summary>
+        /// <param name="angle">the angle to the subtracted</param>
+        /// <returns>new instance of angle with value subtracted represented by <code>Angle</code></returns>
         public abstract Angle Difference(Angle angle);
 
+        /// <summary>
+        /// Multiply the angle to an existing instance
+        /// </summary>
+        /// <param name="angle">the angle to the multiplied</param>
+        /// <returns>new instance of angle with value multiplied represented by <code>Angle</code></returns>
         public abstract Angle Multiply(Angle angle);
 
+        /// <summary>
+        /// Multiply the angle to an existing literal
+        /// </summary>
+        /// <param name="angle"></param>
+        /// <returns>new instance of angle with value multiplied represented by <code>Angle</code></returns>
         public abstract Angle Multiply(double angleValue);
 
+        /// <summary>
+        /// Divide the angle from an existing instance
+        /// </summary>
+        /// <param name="angle">the angle to the divided</param>
+        /// <returns>new instance of angle with value divided represented by <code>Angle</code></returns>
         public abstract Angle Divide(Angle angle);
 
+        /// <summary>
+        /// Divide the angle from an existing literal
+        /// </summary>
+        /// <param name="angle">the angle to the divided</param>
+        /// <returns>new instance of angle with value divided represented by <code>Angle</code></returns>
         public abstract Angle Divide(double angleValue);
-
-        protected void Validate()
-        {
-            if (Value > VALUE_UPPER_LIMIT || Value < VALUE_LOWER_LIMIT)
-            {
-                throw new InvalidOperationException("The angle value is not in the expected range[ " + VALUE_LOWER_LIMIT + ", " + VALUE_UPPER_LIMIT + " ].");
-            }
-        }
-
-        protected bool IsUnitTypeSame(Angle targetAngle)
-        {
-            return this.Unit == targetAngle.Unit;
-        }
         #endregion
 
         #region Angle Operations
@@ -91,10 +115,16 @@ namespace AngleManager.Angle
             return firstAngle.Divide(secondAngle);
         }
 
-        public static Angle operator /(Angle firstAngle, double secondValue)
+        public static Angle operator/ (Angle firstAngle, double secondValue)
         {
             return firstAngle.Divide(secondValue);
         }
+
+        public static Angle operator /(double firstValue, Angle secondAngle)
+        {
+            return secondAngle.Divide(firstValue);
+        }
         #endregion
+
     }
 }
