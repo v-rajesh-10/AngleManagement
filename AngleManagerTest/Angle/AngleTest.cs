@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using AngleManager.Angle;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
@@ -552,6 +551,128 @@ namespace AngleManagerTest.Angle
             // Assert
             result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(0.039, 0.0000000000000005);
+        }
+        #endregion
+
+        #region Trignometric Functions Tests
+        [TestMethod]
+        public void SineOfAngleInDegreesReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(45).Sin();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+        }
+
+        [TestMethod]
+        public void SineOfAngleInRadiansReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(1).Sin();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+        }
+
+        [TestMethod]
+        public void ArcSineOfAngleInDegreesReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(1).ArcSin();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+        }
+
+        [TestMethod]
+        public void ArcSineOfAngleInRadiansReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(1).ArcSin();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+        }
+
+        [TestMethod]
+        public void CosAngleInDegreesReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(45).Cos();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+        }
+
+        [TestMethod]
+        public void CosOfAngleInRadiansReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(0).Cos();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+        }
+
+        [TestMethod]
+        public void ArcCosOfAngleInDegreesReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(1).ArcCos();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+        }
+
+        [TestMethod]
+        public void ArcCosOfAngleInRadiansReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(1).ArcCos();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+        }
+
+        [TestMethod]
+        public void TanAngleInDegreesReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(45).Tan();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+        }
+
+        [TestMethod]
+        public void TanOfAngleInRadiansReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(0).Tan();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+        }
+
+        [TestMethod]
+        public void ArcTanOfAngleInDegreesReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(1).ArcTan();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+        }
+
+        [TestMethod]
+        public void ArcTanOfAngleInRadiansReturnsNewAngleInRadians()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(1).ArcTan();
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
         }
         #endregion
     }

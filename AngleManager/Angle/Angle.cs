@@ -61,6 +61,60 @@ namespace AngleManager.Angle
         {
             return true;
         }
+
+        /// <summary>
+        /// Sin of an angle
+        /// </summary>
+        /// <returns>A new instance <code>RadianAngle</code>with a sine value</returns>
+        public Angle Sin()
+        {
+            return new RadianAngle(Math.Sin(ToRadian()));
+        }
+
+        /// <summary>
+        /// ArcSin of an angle
+        /// </summary>
+        /// <returns>A new instance <code>RadianAngle</code>with an arcsine value</returns>
+        public Angle ArcSin()
+        {
+            return new RadianAngle(Math.Asin(ToRadian()));
+        }
+
+        /// <summary>
+        /// Cos of an angle
+        /// </summary>
+        /// <returns>A new instance <code>RadianAngle</code>with an cos value</returns>
+        public Angle Cos()
+        {
+            return new RadianAngle(Math.Cos(ToRadian()));
+        }
+
+        /// <summary>
+        /// ArcCos of an angle
+        /// </summary>
+        /// <returns>A new instance <code>RadianAngle</code>with an arccos value</returns>
+        public Angle ArcCos()
+        {
+            return new RadianAngle(Math.Acos(ToRadian()));
+        }
+
+        /// <summary>
+        /// Tan of an angle
+        /// </summary>
+        /// <returns>A new instance <code>RadianAngle</code>with an tan value</returns>
+        public Angle Tan()
+        {
+            return new RadianAngle(Math.Tan(ToRadian()));
+        }
+
+        /// <summary>
+        /// ArcTan of an angle
+        /// </summary>
+        /// <returns>A new instance <code>RadianAngle</code>with an arctan value</returns>
+        public Angle ArcTan()
+        {
+            return new RadianAngle(Math.Atan(ToRadian()));
+        }
         #endregion
 
         #region Angle Overrides
