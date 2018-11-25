@@ -10,15 +10,8 @@ namespace AngleManager.Angle
     public abstract class Angle : IEquatable<Angle>
     {
         public static readonly double ANGLE_VALUE_LOWER_LIMIT = 0;
-        /// the value of the angle
-        private double _value;
 
         #region Angle Constructor
-
-        /// <summary>
-        /// Prevent access to invoking default contrcutor from the dervied classes
-        /// </summary>
-        private Angle() { }
 
         /// <summary>
         /// Serves as the default constructor for the dervied classes
@@ -26,11 +19,57 @@ namespace AngleManager.Angle
         /// <param name="value">the angular value</param>
         public Angle(double value)
         {
-            _value = value;
+            Value = value;
         }
         #endregion
 
-        public double Value { get => _value; }
+        public double Value { get; }
+
+        public double SineValue
+        {
+            get
+            {
+                return Math.Sin(ToRadian());
+            }
+        }
+
+        public double ArcSinValue
+        {
+            get
+            {
+                return Math.Asin(ToRadian());
+            }
+        }
+
+        public double CosValue
+        {
+            get
+            {
+                return Math.Cos(ToRadian());
+            }
+        }
+
+        public double ArcCosValue()
+        {
+            return Math.Acos(ToRadian());
+        }
+
+        public double TanValue
+        {
+            get
+            {
+                return Math.Tan(ToRadian());
+            }
+        }
+
+        public double ArcTanValue
+        {
+            get
+            {
+                return Math.Atan(ToRadian());
+            }
+
+        }
 
         #region Angle Common Impmentation For Derived Classes
         /// <summary>
@@ -191,7 +230,7 @@ namespace AngleManager.Angle
         public override int GetHashCode()
         {
             var hashCode = 1571931217;
-            hashCode = hashCode * -1521134295 + _value.GetHashCode();
+            hashCode = hashCode * -1521134295 + Value.GetHashCode();
             return hashCode;
         }
 
