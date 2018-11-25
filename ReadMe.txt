@@ -18,14 +18,29 @@ Details on the Design and Considerations
 
 UnitTests
  - MSTests with Shouldly (for readable assertions)
- - CodeCoverage using MSTests -  90%
+ - CodeCoverage using MSTests - 85%
  - AngleTests contains all the operations and avoided adding the same the DegreeTest and RadianTest class since it would eventually Radian and Degree classes.
  - DegreeTest and RadianTest contains tests for casting
 
- Thoughts / Observations
+ What's Missing
+ Based on my initial self review there seems an issue with Angles in a "Direction" which is ALWAYS converted to "DEGREES" on CASTING.
+ I am forced to do this in the casting operation and it goes back to the logic which I have used for converting Directions. As of now the logic reflects based on the below formula,
+		(450 - direction.Angle.ToDegree()) % 360;
+The above converted degree seems to work however the limitation is "The ANGLE Instance in Direction does not expose any property indicating its type".
+
+I am guessing there could be a better way or a Mathematical Formula that could exists which would use the trignometric functions for computation
+and this would no longer require any specific logic in the casting operations method and shoule get rid of this problem.
+
+Additional Stuff
+For Trignometric Functions I assumed that a consumer could potentially do something like,
+	var angle = angle.Sin() // Returns and Angle Instance
+	double sinValue = angle.SinValue // ReadOnly Property with values of different Math functions loaded during object creation
+I was not certain on the expectation from the document and both the flavours are implemented.
+
+Thoughts / Observations
  Given that this is a library should we even expose the "DegreeAngle" and "RadianAngle" objects. Initially when I started the design was thinking of
  an expression builder pattern (https://www.martinfowler.com/bliki/ExpressionBuilder.html) in which case the consumer of the library would only have to
  - Provide a value (double)
  - Specify the unit (string) - The string would represnt the type of the angle and the consumer need to pass this as "string" since we can extend this
 						       without having to compile the client code ( the consumer of this library).
-However reading the question there was need for casting across different angles and hence decided not to take this route and make the Derived classes as public.
+However reading the question there was need for casting across different angles and hence decided not to take this route and made the Derived classes as public.
