@@ -13,10 +13,22 @@ namespace AngleManager.Angle
         /// the value of the angle
         private double _value;
 
+        #region Angle Constructor
+
+        /// <summary>
+        /// Prevent access to invoking default contrcutor from the dervied classes
+        /// </summary>
+        private Angle() { }
+
+        /// <summary>
+        /// Serves as the default constructor for the dervied classes
+        /// </summary>
+        /// <param name="value">the angular value</param>
         public Angle(double value)
         {
             _value = value;
         }
+        #endregion
 
         public double Value { get => _value; }
 
@@ -101,6 +113,13 @@ namespace AngleManager.Angle
         /// <param name="angle">the angle to the compared</param>
         /// <returns>Positive if the angle is greater and Negative otherwise</returns>
         protected abstract int CompareTo(Angle angle);
+
+        /// <summary>
+        /// Perform modulus operation from an existing instance
+        /// </summary>
+        /// <param name="angle">the angle to the modulus needs to be performed</param>
+        /// <returns>new instance of angle with modulus result represented by <code>Angle</code></returns>
+        protected abstract Angle Modulus(Angle angle);
 
         #endregion
 
@@ -196,6 +215,11 @@ namespace AngleManager.Angle
         public static bool operator> (Angle firstAngle, Angle secondAngle)
         {
             return (0 < firstAngle.CompareTo(secondAngle));
+        }
+
+        public static Angle operator% (Angle firstAngle, Angle secondAngle)
+        {
+            return (firstAngle.Modulus(secondAngle));
         }
         #endregion
 

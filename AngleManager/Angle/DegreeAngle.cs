@@ -69,6 +69,11 @@ namespace AngleManager.Angle
             return this.Value.CompareTo(angle.ToDegree());
         }
 
+        protected override Angle Modulus(Angle angle)
+        {
+            return new DegreeAngle(this.Value - Math.Floor(this.Value / angle.ToDegree()) * angle.ToDegree());
+        }
+
         public override double ToRadian()
         {
             return ((Math.PI / 180) * Value);

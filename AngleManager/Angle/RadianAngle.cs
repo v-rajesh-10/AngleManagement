@@ -26,8 +26,6 @@ namespace AngleManager.Angle
 
         #region Override IAngleOperations
 
-        
-
         protected override Angle Sum(Angle angle)
         {
             return new RadianAngle(this.Value + angle.ToRadian());
@@ -40,8 +38,7 @@ namespace AngleManager.Angle
 
         protected override Angle Multiply(Angle angle)
         {
-            double multiplyRadianValue = angle.ToRadian();
-            return Multiply(multiplyRadianValue);
+            return Multiply(angle.ToRadian());
         }
 
         protected override Angle Multiply(double angleValue)
@@ -67,6 +64,11 @@ namespace AngleManager.Angle
         protected override int CompareTo(Angle angle)
         {
             return this.Value.CompareTo(angle.ToRadian());
+        }
+
+        protected override Angle Modulus(Angle angle)
+        {
+            return new RadianAngle(this.Value - Math.Floor(this.Value / angle.ToRadian()) * angle.ToRadian());
         }
 
         public override double ToDegree()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using AngleManager.Angle;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
 
@@ -506,6 +507,52 @@ namespace AngleManagerTest.Angle
             result.ShouldBeTrue();
         }
 
+        #endregion
+
+        #region Modulus Tests
+        [TestMethod]
+        public void FirstAngleInDegreesModulusToSecondAngleInDegrees()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(10) % CreateDegreeAngleByValue(2.55);
+
+            // Assert
+            result.ShouldBeOfType<DegreeAngle>();
+            result.Value.ShouldBe(2.35, 0.0000000000000005);
+        }
+
+        [TestMethod]
+        public void FirstAngleInDegreesModulusToSecondAngleInRadian()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(10) % CreateRadianAngleByValue(ConvertToRadian(2.55));
+
+            // Assert
+            result.ShouldBeOfType<DegreeAngle>();
+            result.Value.ShouldBe(2.35, 0.0000000000000005);
+        }
+
+        [TestMethod]
+        public void FirstAngleInRadianModulusToSecondAngleInDegrees()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(0.174) % CreateDegreeAngleByValue(ConvertToDegree(0.045));
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+            result.Value.ShouldBe(0.039, 0.0000000000000005);
+        }
+
+        [TestMethod]
+        public void FirstAngleInRadianModulusToSecondAngleInRadian()
+        {
+            // Act
+            var result = CreateRadianAngleByValue(0.174) % CreateRadianAngleByValue(0.045);
+
+            // Assert
+            result.ShouldBeOfType<RadianAngle>();
+            result.Value.ShouldBe(0.039, 0.0000000000000005);
+        }
         #endregion
 
         private AngleManager.Angle.Angle CreateDegreeAngleByValue(double value)
