@@ -221,6 +221,7 @@ namespace AngleManager.Angle
         {
             return (firstAngle.Modulus(secondAngle));
         }
+
         #endregion
 
     }

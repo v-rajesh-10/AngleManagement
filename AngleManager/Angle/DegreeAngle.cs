@@ -89,6 +89,13 @@ namespace AngleManager.Angle
         }
         #endregion
 
+        #region Casting Operations
+        public static explicit operator DegreeAngle(RadianAngle angle)
+        {
+            return new DegreeAngle(angle.ToDegree());
+        }
+        #endregion
+
         public override bool Equals(Angle other)
         {
             return (0 == this.Value.CompareTo(other.ToDegree()));
