@@ -6,7 +6,7 @@ namespace AngleManager.Angle
 {
     public class RadianAngle : Angle
     {
-        private static readonly double RADIAN_UPPER_LIMIT = ConvertToRadian(DegreeAngle.DEGREE_VALUE_UPPER_LIMIT);
+        private static readonly double RADIAN_UPPER_LIMIT = ((Math.PI / 180) * 360);
         #region RadianAngle construction
 
         /// <summary>
@@ -14,9 +14,8 @@ namespace AngleManager.Angle
         /// </summary>
         /// <param name="value">the value of the angle</param>
         /// <exception cref="InvalidOperationException">value not in range of 0 to 360</exception>
-        public RadianAngle(double value)
+        public RadianAngle(double value) : base(value)
         {
-            Value = value;
             if (!IsValid())
             {
                 throw new InvalidOperationException("The radian angle value is not in the expected range[ " + ANGLE_VALUE_LOWER_LIMIT + ", " + RADIAN_UPPER_LIMIT + " ].");
@@ -27,6 +26,54 @@ namespace AngleManager.Angle
 
         #region Override IAngleOperations
 
+        
+
+        protected override Angle Sum(Angle angle)
+        {
+            return new RadianAngle(this.Value + angle.ToRadian());
+        }
+
+        protected override Angle Difference(Angle angle)
+        {
+            return new RadianAngle(this.Value - angle.ToRadian());
+        }
+
+        protected override Angle Multiply(Angle angle)
+        {
+            double multiplyRadianValue = angle.ToRadian();
+            return Multiply(multiplyRadianValue);
+        }
+
+        protected override Angle Multiply(double angleValue)
+        {
+            return new RadianAngle(this.Value * angleValue);
+        }
+
+        protected override Angle Divide(Angle angle)
+        {
+            double divideRadianValue = angle.ToRadian();
+            if (this.Value <= 0 || divideRadianValue <= 0)
+            {
+                throw new InvalidOperationException("The angle radian value is not in the range for division.");
+            }
+            return Divide(divideRadianValue);
+        }
+
+        protected override Angle Divide(double angleValue)
+        {
+            return new RadianAngle(this.Value / angleValue);
+        }
+
+        protected override int CompareTo(Angle angle)
+        {
+            return this.Value.CompareTo(angle.ToRadian());
+        }
+
+        public override double ToDegree()
+        {
+            return ((180 / Math.PI) * this.Value);
+        }
+
         public override bool IsValid()
         {
             if (Value >= ANGLE_VALUE_LOWER_LIMIT && Value <= RADIAN_UPPER_LIMIT)
@@ -35,84 +82,11 @@ namespace AngleManager.Angle
             }
             return false;
         }
-
-        public override Angle Sum(Angle angle)
-        {
-            double addRadianValue = angle.Value;
-            if (!IsSameUnit(angle))
-            {
-                addRadianValue = ConvertToRadian(angle.Value);
-            }
-            return new RadianAngle(this.Value + addRadianValue);
-        }
-
-        public override Angle Difference(Angle angle)
-        {
-            double subtractRadianValue = angle.Value;
-            if (!IsSameUnit(angle))
-            {
-                subtractRadianValue = ConvertToRadian(angle.Value);
-            }
-            return new RadianAngle(this.Value - subtractRadianValue);
-        }
-
-        public override Angle Multiply(Angle angle)
-        {
-            double multiplyRadianValue = angle.Value;
-            if (!IsSameUnit(angle))
-            {
-                multiplyRadianValue = ConvertToRadian(angle.Value);
-            }
-            return Multiply(multiplyRadianValue);
-        }
-
-        public override Angle Multiply(double angleValue)
-        {
-            return new RadianAngle(this.Value * angleValue);
-        }
-
-        public override Angle Divide(Angle angle)
-        {
-            double divideRadianValue = angle.Value;
-            if (!IsSameUnit(angle))
-            {
-                divideRadianValue = ConvertToRadian(angle.Value);
-            }
-            if (this.Value <= 0 || angle.Value <= 0)
-            {
-                throw new InvalidOperationException("The angle radian value is not in the range for division.");
-            }
-            return Divide(divideRadianValue);
-        }
-
-        public override Angle Divide(double angleValue)
-        {
-            return new RadianAngle(this.Value / angleValue);
-        }
-
-        public override int CompareTo(Angle angle)
-        {
-            double angleValue = angle.Value;
-            if (!IsSameUnit(angle))
-            {
-                angleValue = ConvertToRadian(angle.Value);
-            }
-            return this.Value.CompareTo(angleValue);
-        }
         #endregion
 
         public override bool Equals(Angle other)
         {
-            double otherValue = other.Value;
-            if (!IsSameUnit(other))
-            {
-                otherValue = ConvertToRadian(other.Value);
-            }
-            return this.Value.Equals(otherValue);
-        }
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
+            return this.Value.Equals(other.ToRadian());
         }
     }
 }

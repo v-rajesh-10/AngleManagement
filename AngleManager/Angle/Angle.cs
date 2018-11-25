@@ -13,82 +13,94 @@ namespace AngleManager.Angle
         /// the value of the angle
         private double _value;
 
-        public double Value { get => _value; protected set => _value = value; }
+        public Angle(double value)
+        {
+            _value = value;
+        }
+
+        public double Value { get => _value; }
 
         #region Angle Common Impmentation For Derived Classes
-        public static double ConvertToRadian(double degreeValue)
+        /// <summary>
+        /// Converts Degree to Radian
+        /// </summary>
+        /// <returns>the radian value</returns>
+        /// <see cref="RadianAngle"/>
+        public virtual double ToRadian()
         {
-            return ((Math.PI / 180) * degreeValue);
+            return this.Value;
         }
 
-        public static double ConvertToDegree(double radianValue)
+        /// <summary>
+        /// Converts Radian to Degree
+        /// </summary>
+        /// <returns>the degree value</returns>
+        /// <see cref="DegreeAngle"/>
+        public virtual double ToDegree()
         {
-            return ((180 / Math.PI) * radianValue);
+            return this.Value;
         }
-
-        protected bool IsSameUnit(Angle targetAngle)
-        {
-            return GetType().Equals(targetAngle.GetType());
-        }
-
-        #endregion
-
-        #region Angle Overrides
 
         /// <summary>
         /// Validates the Angle Instance 
         /// </summary>
         /// <returns>true if the instance is valid, false otherwise</returns>
-        public abstract bool IsValid();
+        public virtual bool IsValid()
+        {
+            return true;
+        }
+        #endregion
+
+        #region Angle Overrides
 
         /// <summary>
         /// Adds the angle to an existing instance.
         /// </summary>
         /// <param name="angle">the angle to the added</param>
         /// <returns>new instance of angle with values added represented by <code>Angle</code></returns>
-        public abstract Angle Sum(Angle angle);
+        protected abstract Angle Sum(Angle angle);
 
         /// <summary>
         /// Subtract the angle from an existing instance.
         /// </summary>
         /// <param name="angle">the angle to the subtracted</param>
         /// <returns>new instance of angle with value subtracted represented by <code>Angle</code></returns>
-        public abstract Angle Difference(Angle angle);
+        protected abstract Angle Difference(Angle angle);
 
         /// <summary>
         /// Multiply the angle to an existing instance
         /// </summary>
         /// <param name="angle">the angle to the multiplied</param>
         /// <returns>new instance of angle with value multiplied represented by <code>Angle</code></returns>
-        public abstract Angle Multiply(Angle angle);
+        protected abstract Angle Multiply(Angle angle);
 
         /// <summary>
         /// Multiply the angle to an existing literal
         /// </summary>
         /// <param name="angle"></param>
         /// <returns>new instance of angle with value multiplied represented by <code>Angle</code></returns>
-        public abstract Angle Multiply(double angleValue);
+        protected abstract Angle Multiply(double angleValue);
 
         /// <summary>
         /// Divide the angle from an existing instance
         /// </summary>
         /// <param name="angle">the angle to the divided</param>
         /// <returns>new instance of angle with value divided represented by <code>Angle</code></returns>
-        public abstract Angle Divide(Angle angle);
+        protected abstract Angle Divide(Angle angle);
 
         /// <summary>
         /// Divide the angle from an existing literal
         /// </summary>
         /// <param name="angle">the angle to the divided</param>
         /// <returns>new instance of angle with value divided represented by <code>Angle</code></returns>
-        public abstract Angle Divide(double angleValue);
+        protected abstract Angle Divide(double angleValue);
 
         /// <summary>
         /// Compare the angle from an existing instance
         /// </summary>
         /// <param name="angle">the angle to the compared</param>
         /// <returns>Positive if the angle is greater and Negative otherwise</returns>
-        public abstract int CompareTo(Angle angle);
+        protected abstract int CompareTo(Angle angle);
 
         #endregion
 

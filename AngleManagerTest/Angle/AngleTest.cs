@@ -28,7 +28,7 @@ namespace AngleManagerTest.Angle
 
             // Assert
             result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
-            result.Value.ShouldBe(5 + AngleManager.Angle.Angle.ConvertToDegree(1));
+            result.Value.ShouldBe(5 + ConvertToDegree(1));
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@ namespace AngleManagerTest.Angle
 
             // Assert
             result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
-            result.Value.ShouldBe(5 + AngleManager.Angle.Angle.ConvertToRadian(10));
+            result.Value.ShouldBe(5 + ConvertToRadian(10));
         }
 
         [TestMethod]
@@ -82,7 +82,7 @@ namespace AngleManagerTest.Angle
 
             // Assert
             result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
-            result.Value.ShouldBe(360 - AngleManager.Angle.Angle.ConvertToDegree(5));
+            result.Value.ShouldBe(360 - ConvertToDegree(5));
         }
 
         [TestMethod]
@@ -93,7 +93,7 @@ namespace AngleManagerTest.Angle
 
             // Assert
             result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
-            result.Value.ShouldBe(5 - AngleManager.Angle.Angle.ConvertToRadian(10));
+            result.Value.ShouldBe(5 - ConvertToRadian(10));
         }
 
         [TestMethod]
@@ -136,7 +136,7 @@ namespace AngleManagerTest.Angle
 
             // Assert
             result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
-            result.Value.ShouldBe(10 * AngleManager.Angle.Angle.ConvertToDegree(0.50));
+            result.Value.ShouldBe(10 * ConvertToDegree(0.50));
         }
 
         [TestMethod]
@@ -169,7 +169,7 @@ namespace AngleManagerTest.Angle
 
             // Assert
             result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
-            result.Value.ShouldBe(2 * AngleManager.Angle.Angle.ConvertToRadian(2));
+            result.Value.ShouldBe(2 * ConvertToRadian(2));
         }
 
         [TestMethod]
@@ -234,7 +234,7 @@ namespace AngleManagerTest.Angle
 
             // Assert
             result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
-            result.Value.ShouldBe(5 / AngleManager.Angle.Angle.ConvertToDegree(0.50));
+            result.Value.ShouldBe(5 / ConvertToDegree(0.50));
         }
 
         [TestMethod]
@@ -267,7 +267,7 @@ namespace AngleManagerTest.Angle
 
             // Assert
             result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
-            result.Value.ShouldBe(5 / AngleManager.Angle.Angle.ConvertToRadian(100));
+            result.Value.ShouldBe(5 / ConvertToRadian(100));
         }
 
         [TestMethod]
@@ -360,7 +360,7 @@ namespace AngleManagerTest.Angle
         public void FirstAngleInDegreesEqualToSecondAngleInRadian()
         {
             // Act
-            var result = CreateDegreeAngleByValue(5) == CreateRadianAngleByValue(AngleManager.Angle.Angle.ConvertToRadian(5));
+            var result = CreateDegreeAngleByValue(5) == CreateRadianAngleByValue(ConvertToRadian(5));
 
             // Assert
             result.ShouldBeTrue();
@@ -370,7 +370,7 @@ namespace AngleManagerTest.Angle
         public void FirstAngleInRadianEqualToSecondAngleInDegrees()
         {
             // Act
-            var result = CreateRadianAngleByValue(5) == CreateDegreeAngleByValue(AngleManager.Angle.Angle.ConvertToDegree(5));
+            var result = CreateRadianAngleByValue(5) == CreateDegreeAngleByValue(ConvertToDegree(5));
 
             // Assert
             result.ShouldBeTrue();
@@ -400,7 +400,7 @@ namespace AngleManagerTest.Angle
         public void FirstAngleInDegreesNotEqualToSecondAngleInRadian()
         {
             // Act
-            var result = CreateDegreeAngleByValue(5) != CreateRadianAngleByValue(AngleManager.Angle.Angle.ConvertToRadian(6));
+            var result = CreateDegreeAngleByValue(5) != CreateRadianAngleByValue(ConvertToRadian(6));
 
             // Assert
             result.ShouldBeTrue();
@@ -410,7 +410,7 @@ namespace AngleManagerTest.Angle
         public void FirstAngleInRadianNotEqualToSecondAngleInDegrees()
         {
             // Act
-            var result = CreateRadianAngleByValue(5) != CreateDegreeAngleByValue(AngleManager.Angle.Angle.ConvertToDegree(6));
+            var result = CreateRadianAngleByValue(5) != CreateDegreeAngleByValue(ConvertToDegree(6));
 
             // Assert
             result.ShouldBeTrue();
@@ -440,7 +440,7 @@ namespace AngleManagerTest.Angle
         public void FirstAngleInDegreesGreaterThanSecondAngleInRadian()
         {
             // Act
-            var result = CreateDegreeAngleByValue(5) > CreateRadianAngleByValue(AngleManager.Angle.Angle.ConvertToRadian(4));
+            var result = CreateDegreeAngleByValue(5) > CreateRadianAngleByValue(ConvertToRadian(4));
 
             // Assert
             result.ShouldBeTrue();
@@ -450,7 +450,7 @@ namespace AngleManagerTest.Angle
         public void FirstAngleInRadianGreaterThanSecondAngleInDegrees()
         {
             // Act
-            var result = CreateRadianAngleByValue(5) > CreateDegreeAngleByValue(AngleManager.Angle.Angle.ConvertToDegree(4));
+            var result = CreateRadianAngleByValue(5) > CreateDegreeAngleByValue(ConvertToDegree(4));
 
             // Assert
             result.ShouldBeTrue();
@@ -480,7 +480,7 @@ namespace AngleManagerTest.Angle
         public void FirstAngleInDegreesLesserThanSecondAngleInRadian()
         {
             // Act
-            var result = CreateDegreeAngleByValue(5) < CreateRadianAngleByValue(AngleManager.Angle.Angle.ConvertToRadian(6));
+            var result = CreateDegreeAngleByValue(5) < CreateRadianAngleByValue(ConvertToRadian(6));
 
             // Assert
             result.ShouldBeTrue();
@@ -490,7 +490,7 @@ namespace AngleManagerTest.Angle
         public void FirstAngleInRadianLesserThanSecondAngleInDegrees()
         {
             // Act
-            var result = CreateRadianAngleByValue(5) < CreateDegreeAngleByValue(AngleManager.Angle.Angle.ConvertToDegree(6));
+            var result = CreateRadianAngleByValue(5) < CreateDegreeAngleByValue(ConvertToDegree(6));
 
             // Assert
             result.ShouldBeTrue();
@@ -516,6 +516,16 @@ namespace AngleManagerTest.Angle
         private AngleManager.Angle.Angle CreateRadianAngleByValue(double value)
         {
             return new AngleManager.Angle.RadianAngle(value);
+        }
+
+        private double ConvertToRadian(double degreeValue)
+        {
+            return ((Math.PI / 180) * degreeValue);
+        }
+
+        private double ConvertToDegree(double radianValue)
+        {
+            return ((180 / Math.PI) * radianValue);
         }
     }
 }

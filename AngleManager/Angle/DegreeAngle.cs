@@ -14,13 +14,12 @@ namespace AngleManager.Angle
         #region DegreeAngle construction
 
         /// <summary>
-        /// Creates an instance of Radian Angle based on the provided value
+        /// Creates an instance of Degree Angle based on the provided value
         /// </summary>
         /// <param name="value">the value of the angle</param>
         /// <exception cref="InvalidOperationException">value not in range of 0 to 360</exception>
-        public DegreeAngle(double value)
+        public DegreeAngle(double value) : base(value)
         {
-            Value = value;
             if (!IsValid())
             {
                 throw new InvalidOperationException("The degree angle value is not in the expected range[ " + ANGLE_VALUE_LOWER_LIMIT + ", " + DEGREE_VALUE_UPPER_LIMIT + " ].");
@@ -31,61 +30,32 @@ namespace AngleManager.Angle
 
         #region Override IAngleOperations
 
-        public override bool IsValid()
+        protected override Angle Sum(Angle angle)
         {
-            if (Value >= ANGLE_VALUE_LOWER_LIMIT && Value <= DEGREE_VALUE_UPPER_LIMIT)
-            {
-                return true;
-            }
-            return false;
+            return new DegreeAngle(this.Value + angle.ToDegree());
         }
 
-        public override Angle Sum(Angle angle)
+        protected override Angle Difference(Angle angle)
         {
-            double addDegreeValue = angle.Value;
-            if (!IsSameUnit(angle))
-            {
-                addDegreeValue = ConvertToDegree(angle.Value);
-            }
-            return new DegreeAngle(this.Value + addDegreeValue);
+            return new DegreeAngle(this.Value - angle.ToDegree());
         }
 
-        public override Angle Difference(Angle angle)
+        protected override Angle Multiply(Angle angle)
         {
-            double subtractDegreeValue = angle.Value;
-            if (!IsSameUnit(angle))
-            {
-                subtractDegreeValue = ConvertToDegree(angle.Value);
-            }
-            return new DegreeAngle(this.Value - subtractDegreeValue);
+            return Multiply(angle.ToDegree());
         }
 
-        public override Angle Multiply(Angle angle)
-        {
-            double multiplyDegreeValue = angle.Value;
-            if (!IsSameUnit(angle))
-            {
-                multiplyDegreeValue = ConvertToDegree(angle.Value);
-            }
-            return Multiply(multiplyDegreeValue);
-        }
-
-        public override Angle Multiply(double angleValue)
+        protected override Angle Multiply(double angleValue)
         {
             return new DegreeAngle(this.Value * angleValue);
         }
 
-        public override Angle Divide(Angle angle)
+        protected override Angle Divide(Angle angle)
         {
-            double divideDegreeValue = angle.Value;
-            if (!IsSameUnit(angle))
-            {
-                divideDegreeValue = ConvertToDegree(angle.Value);
-            }
-            return Divide(divideDegreeValue);
+            return Divide(angle.ToDegree());
         }
 
-        public override Angle Divide(double angleValue)
+        protected override Angle Divide(double angleValue)
         {
             if (this.Value <= 0 || angleValue <= 0)
             {
@@ -94,29 +64,29 @@ namespace AngleManager.Angle
             return new DegreeAngle(this.Value / angleValue);
         }
 
-        public override int CompareTo(Angle angle)
+        protected override int CompareTo(Angle angle)
         {
-            double angleValue = angle.Value;
-            if (!IsSameUnit(angle))
+            return this.Value.CompareTo(angle.ToDegree());
+        }
+
+        public override double ToRadian()
+        {
+            return ((Math.PI / 180) * Value);
+        }
+
+        public override bool IsValid()
+        {
+            if (Value >= ANGLE_VALUE_LOWER_LIMIT && Value <= DEGREE_VALUE_UPPER_LIMIT)
             {
-                angleValue = ConvertToDegree(angle.Value);
+                return true;
             }
-            return this.Value.CompareTo(angleValue);
+            return false;
         }
         #endregion
 
         public override bool Equals(Angle other)
         {
-            double otherValue = other.Value;
-            if (!IsSameUnit(other))
-            {
-                otherValue = ConvertToDegree(other.Value);
-            }
-            return (0 == this.Value.CompareTo(otherValue));
-        }
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
+            return (0 == this.Value.CompareTo(other.ToDegree()));
         }
     }
 }
