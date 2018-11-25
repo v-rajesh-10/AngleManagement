@@ -31,10 +31,12 @@ namespace AngleManager.Direction
             FOURTH
         };
 
+        #region Angle ReadOnly Values
         public Angle.Angle Angle { get; }
         public Axis AxisType { get; }
         public Movement MovementType { get; }
         public Quadrant QuadrantType { get; private set; }
+        #endregion
 
         #region Direction Constructor
 

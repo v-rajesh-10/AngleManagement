@@ -7,7 +7,8 @@ namespace AngleManager.Angle
     public class RadianAngle : Angle
     {
         private static readonly double RADIAN_UPPER_LIMIT = ((Math.PI / 180) * 360);
-        #region RadianAngle construction
+
+        #region RadianAngle Constructor
 
         /// <summary>
         /// Creates an instance of Radian Angle based on the provided value
@@ -24,7 +25,7 @@ namespace AngleManager.Angle
 
         #endregion
 
-        #region Override IAngleOperations
+        #region Angle Overrides
 
         protected override Angle Sum(Angle angle)
         {
@@ -71,6 +72,10 @@ namespace AngleManager.Angle
             return new RadianAngle(this.Value - Math.Floor(this.Value / angle.ToRadian()) * angle.ToRadian());
         }
 
+        #endregion
+
+        #region Angle Virtual Overrides
+
         public override double ToDegree()
         {
             return ((180 / Math.PI) * this.Value);
@@ -84,6 +89,7 @@ namespace AngleManager.Angle
             }
             return false;
         }
+
         #endregion
 
         #region Casting Operations
@@ -93,9 +99,11 @@ namespace AngleManager.Angle
         }
         #endregion
 
+        #region Angle IEquatable Overrides
         public override bool Equals(Angle other)
         {
             return this.Value.Equals(other.ToRadian());
         }
+        #endregion
     }
 }

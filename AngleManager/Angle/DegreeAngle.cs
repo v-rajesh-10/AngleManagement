@@ -11,7 +11,7 @@ namespace AngleManager.Angle
     {
         public static readonly double DEGREE_VALUE_UPPER_LIMIT = 360;
 
-        #region DegreeAngle construction
+        #region DegreeAngle Constructor
 
         /// <summary>
         /// Creates an instance of Degree Angle based on the provided value
@@ -28,7 +28,7 @@ namespace AngleManager.Angle
 
         #endregion
 
-        #region Override IAngleOperations
+        #region Angle Overrides
 
         protected override Angle Sum(Angle angle)
         {
@@ -74,6 +74,10 @@ namespace AngleManager.Angle
             return new DegreeAngle(this.Value - Math.Floor(this.Value / angle.ToDegree()) * angle.ToDegree());
         }
 
+        #endregion
+
+        #region Angle Virtual Overrides
+
         public override double ToRadian()
         {
             return ((Math.PI / 180) * Value);
@@ -87,6 +91,7 @@ namespace AngleManager.Angle
             }
             return false;
         }
+
         #endregion
 
         #region Casting Operations
@@ -96,9 +101,11 @@ namespace AngleManager.Angle
         }
         #endregion
 
+        #region Angle IEquatable Overrides
         public override bool Equals(Angle other)
         {
             return (0 == this.Value.CompareTo(other.ToDegree()));
         }
+        #endregion
     }
 }

@@ -147,24 +147,6 @@ namespace AngleManagerTest.Direction
             result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CLOCKWISE);
         }
 
-        [TestMethod]
-        [Ignore("This could potentially be a Design Flaw OR the Upper and Lower Limit values OR the formula to solve the direction casting")]
-        public void TestCompassDirectionCastingFromMathematicalDirectionInRadiansForAngleInFirstQuadrant()
-        {
-            // Arrange
-            var firstQuadrantAngle = new AngleManager.Angle.RadianAngle(ConvertToRadian(30));
-            MathematicalDirection mathematicalDirection = new MathematicalDirection(firstQuadrantAngle);
-
-            //Act
-            var result = (CompassDirection)mathematicalDirection;
-
-            // Assert
-            result.Angle.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
-            result.Angle.Value.ShouldBe(ConvertToRadian(60));
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.POSITIVE_Y_AXIS);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.FIRST);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CLOCKWISE);
-        }
         #endregion
     }
 }

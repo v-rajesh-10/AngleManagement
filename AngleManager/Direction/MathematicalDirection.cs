@@ -6,7 +6,7 @@ namespace AngleManager.Direction
 {
     public class MathematicalDirection : Direction
     {
-        #region MathematicalDirection construction
+        #region MathematicalDirection Constructor
 
         /// <summary>
         /// 
@@ -19,9 +19,8 @@ namespace AngleManager.Direction
         #region Casting Operations
         public static explicit operator MathematicalDirection(CompassDirection direction)
         {
+            //TODO : Revisit this logic since this is forcing to create an Angle Instance
             double convertedCompassValue = (450 - direction.Angle.ToDegree()) % 360;
-            //TODO : Need to understand what needs to be done to be same to create the "same" type of angle as part of this cast
-            // after the value conversion...
             return new MathematicalDirection(new Angle.DegreeAngle(convertedCompassValue));
         }
         #endregion
