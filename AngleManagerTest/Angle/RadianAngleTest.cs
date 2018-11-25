@@ -6,21 +6,22 @@ using Shouldly;
 namespace AngleManagerTest.Angle
 {
     [TestClass]
-    public class DegreeAngleTest : AngleTestContext
+    public class RadianAngleTest : AngleTestContext
     {
         #region Casting Tests
         [TestMethod]
-        public void AngleInRadianExplicitCastedToAngleInDegree()
+        public void AngleInDegreesExplicitCastedToAngleInRadians()
         {
             // Arrange
-            var firstAngleInRadian = new RadianAngle(5);
+            var firstAngleInDegree = new DegreeAngle(10);
 
             // Act
-            DegreeAngle castedInstance = (DegreeAngle)firstAngleInRadian;
+            RadianAngle castedInstance = (RadianAngle)firstAngleInDegree;
 
             // Assert
-            castedInstance.Value.ShouldBe(ConvertToDegree(5));
+            castedInstance.Value.ShouldBe(ConvertToRadian(10));
         }
+
         #endregion
     }
 }

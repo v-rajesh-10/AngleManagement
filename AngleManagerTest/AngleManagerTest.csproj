@@ -54,7 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Angle\AngleTest.cs" />
+    <Compile Include="Angle\AngleTestContext.cs" />
     <Compile Include="Angle\DegreeAngleTest.cs" />
+    <Compile Include="Angle\RadianAngleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

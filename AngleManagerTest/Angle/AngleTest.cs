@@ -7,7 +7,7 @@ using Shouldly;
 namespace AngleManagerTest.Angle
 {
     [TestClass]
-    public class AngleTest
+    public class AngleTest : AngleTestContext
     {
         #region Angle Addition Tests
         [TestMethod]
@@ -554,25 +554,5 @@ namespace AngleManagerTest.Angle
             result.Value.ShouldBe(0.039, 0.0000000000000005);
         }
         #endregion
-
-        private AngleManager.Angle.Angle CreateDegreeAngleByValue(double value)
-        {
-            return new AngleManager.Angle.DegreeAngle(value);
-        }
-
-        private AngleManager.Angle.Angle CreateRadianAngleByValue(double value)
-        {
-            return new AngleManager.Angle.RadianAngle(value);
-        }
-
-        private double ConvertToRadian(double degreeValue)
-        {
-            return ((Math.PI / 180) * degreeValue);
-        }
-
-        private double ConvertToDegree(double radianValue)
-        {
-            return ((180 / Math.PI) * radianValue);
-        }
     }
 }
