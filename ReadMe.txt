@@ -17,8 +17,8 @@ Details on the Design and Considerations
 				 var angle3 = angle.Sum(angle2) // Sum is not available to the consumer of the library
 
 UnitTests
- - MSTests with Shouldly (for readable assertions)
- - CodeCoverage using MSTests - 85%
+ - 80 tests written in MSTests with Shouldly (for readable assertions)
+ - CodeCoverage using MSTests - 87.5%
  - AngleTests contains all the operations and avoided adding the same the DegreeTest and RadianTest class since it would eventually Radian and Degree classes.
  - DegreeTest and RadianTest contains tests for casting
 

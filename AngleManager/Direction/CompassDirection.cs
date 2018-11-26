@@ -4,14 +4,17 @@ using System.Text;
 
 namespace AngleManager.Direction
 {
+    /// <summary>
+    /// Represents a Compass Direction which is the angle measured from Postive Y Axis in Clockwise direction.
+    /// </summary>
     public class CompassDirection : Direction
     {
         #region CompassDirection Constructor
 
         /// <summary>
-        /// 
+        /// CompassDirection injected with an angle.
         /// </summary>
-        /// <param name="angle"></param>
+        /// <param name="angle">the angle associated with the direction represented by <code>Angle</code></param>
         public CompassDirection(Angle.Angle angle) : base(angle, Axis.POSITIVE_Y_AXIS, Movement.CLOCKWISE) { }
 
         #endregion

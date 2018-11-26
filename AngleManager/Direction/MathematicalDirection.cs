@@ -4,14 +4,18 @@ using System.Text;
 
 namespace AngleManager.Direction
 {
+    /// <summary>
+    /// Represents a Mathematical Direction which is the angle measured from Postive X Axis in Counter Clockwise direction.
+    /// </summary>
     public class MathematicalDirection : Direction
     {
         #region MathematicalDirection Constructor
 
         /// <summary>
-        /// 
+        /// MathematicalDirection injected with an angle.
         /// </summary>
-        /// <param name="angle"></param>
+        /// <param name="angle">the angle associated with the direction represented by <code>Angle</code></param>
+
         public MathematicalDirection(Angle.Angle angle) : base(angle, Axis.POSITIVE_X_AXIS, Movement.COUNTER_CLOCKWISE) { }
 
         #endregion
