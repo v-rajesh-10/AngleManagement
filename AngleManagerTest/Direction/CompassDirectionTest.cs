@@ -1,10 +1,10 @@
-﻿using System;
-using AngleManager.Direction;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Shouldly;
-
+﻿
 namespace AngleManagerTest.Direction
 {
+    using AngleManager.Direction;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Shouldly;
+
     [TestClass]
     public class CompassDirectionTest : AngleTestContext
     {
@@ -20,9 +20,9 @@ namespace AngleManagerTest.Direction
 
             // Assert
             result.Angle.ShouldBeSameAs(firstQuadrantAngle);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.POSITIVE_Y_AXIS);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.FIRST);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CLOCKWISE);
+            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveYAxis);
+            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.First);
+            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.Clockwise);
         }
 
         [TestMethod]
@@ -36,9 +36,9 @@ namespace AngleManagerTest.Direction
 
             // Assert
             result.Angle.ShouldBeSameAs(secondQuadrantAngle);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.POSITIVE_Y_AXIS);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.SECOND);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CLOCKWISE);
+            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveYAxis);
+            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Second);
+            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.Clockwise);
         }
 
         [TestMethod]
@@ -52,9 +52,9 @@ namespace AngleManagerTest.Direction
 
             // Assert
             result.Angle.ShouldBeSameAs(secondQuadrantAngle);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.POSITIVE_Y_AXIS);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.THIRD);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CLOCKWISE);
+            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveYAxis);
+            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Third);
+            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.Clockwise);
         }
 
         [TestMethod]
@@ -68,9 +68,9 @@ namespace AngleManagerTest.Direction
 
             // Assert
             result.Angle.ShouldBeSameAs(secondQuadrantAngle);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.POSITIVE_Y_AXIS);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.FOURTH);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CLOCKWISE);
+            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveYAxis);
+            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Fourth);
+            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.Clockwise);
         }
         #endregion
 
@@ -88,9 +88,9 @@ namespace AngleManagerTest.Direction
             // Assert
             result.Angle.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
             result.Angle.Value.ShouldBe(60);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.POSITIVE_Y_AXIS);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.FIRST);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CLOCKWISE);
+            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveYAxis);
+            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.First);
+            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.Clockwise);
         }
 
         [TestMethod]
@@ -106,9 +106,9 @@ namespace AngleManagerTest.Direction
             // Assert
             result.Angle.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
             result.Angle.Value.ShouldBe(330);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.POSITIVE_Y_AXIS);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.FOURTH);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CLOCKWISE);
+            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveYAxis);
+            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Fourth);
+            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.Clockwise);
         }
 
         [TestMethod]
@@ -124,9 +124,9 @@ namespace AngleManagerTest.Direction
             // Assert
             result.Angle.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
             result.Angle.Value.ShouldBe(210);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.POSITIVE_Y_AXIS);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.THIRD);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CLOCKWISE);
+            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveYAxis);
+            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Third);
+            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.Clockwise);
         }
 
         [TestMethod]
@@ -142,9 +142,9 @@ namespace AngleManagerTest.Direction
             // Assert
             result.Angle.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
             result.Angle.Value.ShouldBe(130);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.POSITIVE_Y_AXIS);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.SECOND);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CLOCKWISE);
+            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveYAxis);
+            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Second);
+            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.Clockwise);
         }
 
         #endregion

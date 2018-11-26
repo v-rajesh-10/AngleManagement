@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace AngleManagerTest
 {
+    using System;
+
     public class AngleTestContext
     {
         protected double ConvertToRadian(double degreeValue)

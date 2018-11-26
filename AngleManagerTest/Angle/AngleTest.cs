@@ -1,10 +1,11 @@
-﻿using System;
-using AngleManager.Angle;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Shouldly;
-
+﻿
 namespace AngleManagerTest.Angle
 {
+    using System;
+    using AngleManager.Angle;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Shouldly;
+
     [TestClass]
     public class AngleTest : AngleTestContext
     {
@@ -16,7 +17,7 @@ namespace AngleManagerTest.Angle
             var result = CreateDegreeAngleByValue(10) + CreateDegreeAngleByValue(5);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(15);
         }
 
@@ -27,7 +28,7 @@ namespace AngleManagerTest.Angle
             var result = CreateDegreeAngleByValue(5) + CreateRadianAngleByValue(1);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(5 + ConvertToDegree(1));
         }
 
@@ -38,7 +39,7 @@ namespace AngleManagerTest.Angle
             var result = CreateRadianAngleByValue(5) + CreateDegreeAngleByValue(10);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(5 + ConvertToRadian(10));
         }
 
@@ -49,7 +50,7 @@ namespace AngleManagerTest.Angle
             var result = CreateRadianAngleByValue(5) + CreateRadianAngleByValue(1);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(6);
         }
 
@@ -70,7 +71,7 @@ namespace AngleManagerTest.Angle
             var result = CreateDegreeAngleByValue(5) - CreateDegreeAngleByValue(5);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(0);
         }
 
@@ -81,7 +82,7 @@ namespace AngleManagerTest.Angle
             var result = CreateDegreeAngleByValue(360) - CreateRadianAngleByValue(5);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(360 - ConvertToDegree(5));
         }
 
@@ -92,7 +93,7 @@ namespace AngleManagerTest.Angle
             var result = CreateRadianAngleByValue(5) - CreateDegreeAngleByValue(10);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(5 - ConvertToRadian(10));
         }
 
@@ -103,7 +104,7 @@ namespace AngleManagerTest.Angle
             var result = CreateRadianAngleByValue(6) - CreateRadianAngleByValue(6);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(0);
         }
 
@@ -124,7 +125,7 @@ namespace AngleManagerTest.Angle
             var result = CreateDegreeAngleByValue(10) * CreateDegreeAngleByValue(5);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(50);
         }
 
@@ -135,7 +136,7 @@ namespace AngleManagerTest.Angle
             var result = CreateDegreeAngleByValue(10) * CreateRadianAngleByValue(0.50);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(10 * ConvertToDegree(0.50));
         }
 
@@ -146,7 +147,7 @@ namespace AngleManagerTest.Angle
             var result = CreateDegreeAngleByValue(10) * 5;
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(50);
         }
 
@@ -157,7 +158,7 @@ namespace AngleManagerTest.Angle
             var result = 5 * CreateDegreeAngleByValue(10);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(50);
         }
 
@@ -168,7 +169,7 @@ namespace AngleManagerTest.Angle
             var result = CreateRadianAngleByValue(2) * CreateDegreeAngleByValue(2);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(2 * ConvertToRadian(2));
         }
 
@@ -179,7 +180,7 @@ namespace AngleManagerTest.Angle
             var result = CreateRadianAngleByValue(2) * CreateRadianAngleByValue(3);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(6);
         }
 
@@ -190,7 +191,7 @@ namespace AngleManagerTest.Angle
             var result = CreateRadianAngleByValue(2) * 3;
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(6);
         }
 
@@ -201,7 +202,7 @@ namespace AngleManagerTest.Angle
             var result = 2 * CreateRadianAngleByValue(3);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(6);
         }
 
@@ -222,7 +223,7 @@ namespace AngleManagerTest.Angle
             var result = CreateDegreeAngleByValue(5) / CreateDegreeAngleByValue(5);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(1);
         }
 
@@ -233,7 +234,7 @@ namespace AngleManagerTest.Angle
             var result = CreateDegreeAngleByValue(5) / CreateRadianAngleByValue(0.50);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(5 / ConvertToDegree(0.50));
         }
 
@@ -244,7 +245,7 @@ namespace AngleManagerTest.Angle
             var result = CreateDegreeAngleByValue(5) / 5;
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(1);
         }
 
@@ -255,7 +256,7 @@ namespace AngleManagerTest.Angle
             var result =  5 / CreateDegreeAngleByValue(5);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
+            result.ShouldBeOfType<DegreeAngle>();
             result.Value.ShouldBe(1);
         }
 
@@ -266,7 +267,7 @@ namespace AngleManagerTest.Angle
             var result = CreateRadianAngleByValue(5) / CreateDegreeAngleByValue(100);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(5 / ConvertToRadian(100));
         }
 
@@ -277,7 +278,7 @@ namespace AngleManagerTest.Angle
             var result = CreateRadianAngleByValue(5) / CreateRadianAngleByValue(5);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(1);
         }
 
@@ -288,7 +289,7 @@ namespace AngleManagerTest.Angle
             var result = CreateRadianAngleByValue(5) / 5;
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(1);
         }
 
@@ -299,7 +300,7 @@ namespace AngleManagerTest.Angle
             var result = 5 / CreateRadianAngleByValue(5);
 
             // Assert
-            result.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.ShouldBeOfType<RadianAngle>();
             result.Value.ShouldBe(1);
         }
 
@@ -510,6 +511,17 @@ namespace AngleManagerTest.Angle
 
         #region Modulus Tests
         [TestMethod]
+        public void FirstAngleInDegreesForWholeNumbersModulusToSecondAngleInDegrees()
+        {
+            // Act
+            var result = CreateDegreeAngleByValue(10) % CreateDegreeAngleByValue(5);
+
+            // Assert
+            result.ShouldBeOfType<DegreeAngle>();
+            result.Value.ShouldBe(0);
+        }
+
+        [TestMethod]
         public void FirstAngleInDegreesModulusToSecondAngleInDegrees()
         {
             // Act
@@ -556,123 +568,123 @@ namespace AngleManagerTest.Angle
 
         #region Trignometric Functions Tests
         [TestMethod]
-        public void SineOfAngleInDegreesReturnsNewAngleInRadians()
+        public void SineOfAngleInDegreesReturnsAngleValueInRadians()
         {
-            // Act
-            var result = CreateDegreeAngleByValue(45).Sin();
+            // Arrange and Act
+            var result = CreateDegreeAngleByValue(45).SineValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Sin(ConvertToRadian(45)));
         }
 
         [TestMethod]
-        public void SineOfAngleInRadiansReturnsNewAngleInRadians()
+        public void SineOfAngleInRadiansReturnsAngleValueInRadians()
         {
-            // Act
-            var result = CreateRadianAngleByValue(1).Sin();
+            // Arrange and Act
+            var result = CreateRadianAngleByValue(1).SineValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Sin(1));
         }
 
         [TestMethod]
-        public void ArcSineOfAngleInDegreesReturnsNewAngleInRadians()
+        public void ArcSineOfAngleInDegreesReturnsAngleValueInRadians()
         {
-            // Act
-            var result = CreateDegreeAngleByValue(1).ArcSin();
+            // Arrange and Act
+            var result = CreateDegreeAngleByValue(1).ArcSinValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Asin(ConvertToRadian(1)));
         }
 
         [TestMethod]
-        public void ArcSineOfAngleInRadiansReturnsNewAngleInRadians()
+        public void ArcSineOfAngleInRadiansReturnsAngleValueInRadians()
         {
-            // Act
-            var result = CreateRadianAngleByValue(1).ArcSin();
+            // Arrange and Act
+            var result = CreateRadianAngleByValue(1).ArcSinValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Asin(1));
         }
 
         [TestMethod]
-        public void CosAngleInDegreesReturnsNewAngleInRadians()
+        public void CosAngleInDegreesReturnsAngleValueInRadians()
         {
-            // Act
-            var result = CreateDegreeAngleByValue(45).Cos();
+            // Arrange and Act
+            var result = CreateDegreeAngleByValue(45).CosValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Cos(ConvertToRadian(45)));
         }
 
         [TestMethod]
-        public void CosOfAngleInRadiansReturnsNewAngleInRadians()
+        public void CosOfAngleInRadiansReturnsAngleValueInRadians()
         {
-            // Act
-            var result = CreateRadianAngleByValue(0).Cos();
+            // Arrange and Act
+            var result = CreateRadianAngleByValue(0).CosValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Cos(0));
         }
 
         [TestMethod]
-        public void ArcCosOfAngleInDegreesReturnsNewAngleInRadians()
+        public void ArcCosOfAngleInDegreesReturnsAngleValueInRadians()
         {
-            // Act
-            var result = CreateDegreeAngleByValue(1).ArcCos();
+            // Arrange and Act
+            var result = CreateDegreeAngleByValue(1).ArcCosValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Acos(ConvertToRadian(1)));
         }
 
         [TestMethod]
-        public void ArcCosOfAngleInRadiansReturnsNewAngleInRadians()
+        public void ArcCosOfAngleInRadiansReturnsAngleValueInRadians()
         {
-            // Act
-            var result = CreateRadianAngleByValue(1).ArcCos();
+            // Arrange and Act
+            var result = CreateRadianAngleByValue(1).ArcCosValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Acos(1));
         }
 
         [TestMethod]
-        public void TanAngleInDegreesReturnsNewAngleInRadians()
+        public void TanAngleInDegreesReturnsAngleValueInRadians()
         {
-            // Act
-            var result = CreateDegreeAngleByValue(45).Tan();
+            // Arrange and Act
+            var result = CreateDegreeAngleByValue(45).TanValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Tan(ConvertToRadian(45)));
         }
 
         [TestMethod]
-        public void TanOfAngleInRadiansReturnsNewAngleInRadians()
+        public void TanOfAngleInRadiansReturnsAngleValueInRadians()
         {
-            // Act
-            var result = CreateRadianAngleByValue(0).Tan();
+            // Arrange and Act
+            var result = CreateRadianAngleByValue(0).TanValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Tan(0));
         }
 
         [TestMethod]
-        public void ArcTanOfAngleInDegreesReturnsNewAngleInRadians()
+        public void ArcTanOfAngleInDegreesReturnsAngleValueInRadians()
         {
             // Act
-            var result = CreateDegreeAngleByValue(1).ArcTan();
+            var result = CreateDegreeAngleByValue(1).ArcTanValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Atan(ConvertToRadian(1)));
         }
 
         [TestMethod]
-        public void ArcTanOfAngleInRadiansReturnsNewAngleInRadians()
+        public void ArcTanOfAngleInRadiansReturnsAngleValueInRadians()
         {
             // Act
-            var result = CreateRadianAngleByValue(1).ArcTan();
+            var result = CreateRadianAngleByValue(1).ArcTanValue;
 
             // Assert
-            result.ShouldBeOfType<RadianAngle>();
+            result.ShouldBe(Math.Atan(1));
         }
         #endregion
     }

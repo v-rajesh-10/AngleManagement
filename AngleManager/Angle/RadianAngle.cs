@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AngleManager.Angle
+﻿namespace AngleManager.Angle
 {
+    using System;
     public class RadianAngle : Angle
     {
-        private static readonly double RADIAN_UPPER_LIMIT = ((Math.PI / 180) * 360);
+        private const double RadianUpperLimit = (Math.PI / 180) * 360;
 
         #region RadianAngle Constructor
 
@@ -14,12 +11,12 @@ namespace AngleManager.Angle
         /// Creates an instance of Radian Angle based on the provided value
         /// </summary>
         /// <param name="value">the value of the angle</param>
-        /// <exception cref="InvalidOperationException">value not in range of 0 to 360</exception>
+        /// <exception cref="T:System.InvalidOperationException">value not in range of 0 to 360</exception>
         public RadianAngle(double value) : base(value)
         {
             if (!IsValid())
             {
-                throw new InvalidOperationException("The radian angle value is not in the expected range[ " + ANGLE_VALUE_LOWER_LIMIT + ", " + RADIAN_UPPER_LIMIT + " ].");
+                throw new InvalidOperationException("The radian angle value is not in the expected range[ " + AngleValueLowerLimit + ", " + RadianUpperLimit + " ].");
             }
         }
 
@@ -29,12 +26,12 @@ namespace AngleManager.Angle
 
         protected override Angle Sum(Angle angle)
         {
-            return new RadianAngle(this.Value + angle.ToRadian());
+            return new RadianAngle(Value + angle.ToRadian());
         }
 
         protected override Angle Difference(Angle angle)
         {
-            return new RadianAngle(this.Value - angle.ToRadian());
+            return new RadianAngle(Value - angle.ToRadian());
         }
 
         protected override Angle Multiply(Angle angle)
@@ -44,13 +41,13 @@ namespace AngleManager.Angle
 
         protected override Angle Multiply(double angleValue)
         {
-            return new RadianAngle(this.Value * angleValue);
+            return new RadianAngle(Value * angleValue);
         }
 
         protected override Angle Divide(Angle angle)
         {
-            double divideRadianValue = angle.ToRadian();
-            if (this.Value <= 0 || divideRadianValue <= 0)
+            var divideRadianValue = angle.ToRadian();
+            if (Value <= 0 || divideRadianValue <= 0)
             {
                 throw new InvalidOperationException("The angle radian value is not in the range for division.");
             }
@@ -59,17 +56,17 @@ namespace AngleManager.Angle
 
         protected override Angle Divide(double angleValue)
         {
-            return new RadianAngle(this.Value / angleValue);
+            return new RadianAngle(Value / angleValue);
         }
 
         protected override int CompareTo(Angle angle)
         {
-            return this.Value.CompareTo(angle.ToRadian());
+            return Value.CompareTo(angle.ToRadian());
         }
 
         protected override Angle Modulus(Angle angle)
         {
-            return new RadianAngle(this.Value - Math.Floor(this.Value / angle.ToRadian()) * angle.ToRadian());
+            return new RadianAngle(Value - (Math.Floor(Value / angle.ToRadian()) * angle.ToRadian()));
         }
 
         #endregion
@@ -78,16 +75,12 @@ namespace AngleManager.Angle
 
         public override double ToDegree()
         {
-            return ((180 / Math.PI) * this.Value);
+            return (180 / Math.PI) * Value;
         }
 
         public override bool IsValid()
         {
-            if (Value >= ANGLE_VALUE_LOWER_LIMIT && Value <= RADIAN_UPPER_LIMIT)
-            {
-                return true;
-            }
-            return false;
+            return Value >= AngleValueLowerLimit && Value <= RadianUpperLimit;
         }
 
         #endregion
@@ -102,7 +95,7 @@ namespace AngleManager.Angle
         #region Angle IEquatable Overrides
         public override bool Equals(Angle other)
         {
-            return this.Value.Equals(other.ToRadian());
+            return other != null && Value.Equals(other.ToRadian());
         }
         #endregion
     }

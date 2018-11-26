@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AngleManager.Angle
+﻿namespace AngleManager.Angle
 {
+    using System;
     /// <summary>
     /// Represents the Degree Angle which extends the Angle base class exposed to the consumer
     /// </summary>
     public class DegreeAngle : Angle
     {
-        public static readonly double DEGREE_VALUE_UPPER_LIMIT = 360;
+        private const double DegreeValueUpperLimit = 360;
 
         #region DegreeAngle Constructor
 
@@ -22,7 +19,7 @@ namespace AngleManager.Angle
         {
             if (!IsValid())
             {
-                throw new InvalidOperationException("The degree angle value is not in the expected range[ " + ANGLE_VALUE_LOWER_LIMIT + ", " + DEGREE_VALUE_UPPER_LIMIT + " ].");
+                throw new InvalidOperationException("The degree angle value is not in the expected range[ " + AngleValueLowerLimit + ", " + DegreeValueUpperLimit + " ].");
             }
         }
 
@@ -32,12 +29,12 @@ namespace AngleManager.Angle
 
         protected override Angle Sum(Angle angle)
         {
-            return new DegreeAngle(this.Value + angle.ToDegree());
+            return new DegreeAngle(Value + angle.ToDegree());
         }
 
         protected override Angle Difference(Angle angle)
         {
-            return new DegreeAngle(this.Value - angle.ToDegree());
+            return new DegreeAngle(Value - angle.ToDegree());
         }
 
         protected override Angle Multiply(Angle angle)
@@ -47,7 +44,7 @@ namespace AngleManager.Angle
 
         protected override Angle Multiply(double angleValue)
         {
-            return new DegreeAngle(this.Value * angleValue);
+            return new DegreeAngle(Value * angleValue);
         }
 
         protected override Angle Divide(Angle angle)
@@ -57,21 +54,21 @@ namespace AngleManager.Angle
 
         protected override Angle Divide(double angleValue)
         {
-            if (this.Value <= 0 || angleValue <= 0)
+            if (Value <= 0 || angleValue <= 0)
             {
                 throw new InvalidOperationException("The angle degree value is not in the range for division.");
             }
-            return new DegreeAngle(this.Value / angleValue);
+            return new DegreeAngle(Value / angleValue);
         }
 
         protected override int CompareTo(Angle angle)
         {
-            return this.Value.CompareTo(angle.ToDegree());
+            return Value.CompareTo(angle.ToDegree());
         }
 
         protected override Angle Modulus(Angle angle)
         {
-            return new DegreeAngle(this.Value - Math.Floor(this.Value / angle.ToDegree()) * angle.ToDegree());
+            return new DegreeAngle(Value - (Math.Floor(Value / angle.ToDegree()) * angle.ToDegree()));
         }
 
         #endregion
@@ -85,7 +82,7 @@ namespace AngleManager.Angle
 
         public override bool IsValid()
         {
-            if (Value >= ANGLE_VALUE_LOWER_LIMIT && Value <= DEGREE_VALUE_UPPER_LIMIT)
+            if (Value >= AngleValueLowerLimit && Value <= DegreeValueUpperLimit)
             {
                 return true;
             }
@@ -104,7 +101,7 @@ namespace AngleManager.Angle
         #region Angle IEquatable Overrides
         public override bool Equals(Angle other)
         {
-            return (0 == this.Value.CompareTo(other.ToDegree()));
+            return other != null && 0 == Value.CompareTo(other.ToDegree());
         }
         #endregion
     }

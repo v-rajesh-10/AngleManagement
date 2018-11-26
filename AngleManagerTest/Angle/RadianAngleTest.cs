@@ -1,25 +1,26 @@
-﻿using System;
-using AngleManager.Angle;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Shouldly;
-
+﻿
 namespace AngleManagerTest.Angle
 {
+    using AngleManager.Angle;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Shouldly;
+
     [TestClass]
     public class RadianAngleTest : AngleTestContext
     {
         #region Casting Tests
         [TestMethod]
-        public void AngleInDegreesExplicitCastedToAngleInRadians()
+        public void AngleInDegreesExplicitCastToAngleInRadians()
         {
             // Arrange
             var firstAngleInDegree = new DegreeAngle(10);
 
             // Act
-            RadianAngle castedInstance = (RadianAngle)firstAngleInDegree;
+            var castInstance = (RadianAngle)firstAngleInDegree;
 
             // Assert
-            castedInstance.Value.ShouldBe(ConvertToRadian(10));
+            castInstance.ShouldBeOfType<RadianAngle>();
+            castInstance.Value.ShouldBe(ConvertToRadian(10));
         }
 
         #endregion
