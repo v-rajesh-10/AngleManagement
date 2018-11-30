@@ -26,17 +26,17 @@
 
         protected override Angle Sum(Angle angle)
         {
-            return new RadianAngle(Value + angle.ToRadian());
+            return new RadianAngle(Value + angle.To<RadianAngle>().Value);
         }
 
         protected override Angle Difference(Angle angle)
         {
-            return new RadianAngle(Value - angle.ToRadian());
+            return new RadianAngle(Value - angle.To<RadianAngle>().Value);
         }
 
         protected override Angle Multiply(Angle angle)
         {
-            return Multiply(angle.ToRadian());
+            return Multiply(angle.To<RadianAngle>().Value);
         }
 
         protected override Angle Multiply(double angleValue)
@@ -46,7 +46,7 @@
 
         protected override Angle Divide(Angle angle)
         {
-            var divideRadianValue = angle.ToRadian();
+            var divideRadianValue = angle.To<RadianAngle>().Value;
             if (Value <= 0 || divideRadianValue <= 0)
             {
                 throw new InvalidOperationException("The angle radian value is not in the range for division.");
@@ -61,22 +61,17 @@
 
         protected override int CompareTo(Angle angle)
         {
-            return Value.CompareTo(angle.ToRadian());
+            return Value.CompareTo(angle.To<RadianAngle>().Value);
         }
 
         protected override Angle Modulus(Angle angle)
         {
-            return new RadianAngle(Value - (Math.Floor(Value / angle.ToRadian()) * angle.ToRadian()));
+            return new RadianAngle(Value - (Math.Floor(Value / angle.To<RadianAngle>().Value) * angle.To<RadianAngle>().Value));
         }
 
         #endregion
 
         #region Angle Virtual Overrides
-
-        public override double ToDegree()
-        {
-            return (180 / Math.PI) * Value;
-        }
 
         public override bool IsValid()
         {
@@ -88,14 +83,14 @@
         #region Casting Operations
         public static explicit operator RadianAngle(DegreeAngle angle)
         {
-            return new RadianAngle(angle.ToRadian());
+            return new RadianAngle(angle.To<RadianAngle>().Value);
         }
         #endregion
 
         #region Angle IEquatable Overrides
         public override bool Equals(Angle other)
         {
-            return other != null && Value.Equals(other.ToRadian());
+            return other != null && Value.Equals(other.To<RadianAngle>().Value);
         }
         #endregion
     }

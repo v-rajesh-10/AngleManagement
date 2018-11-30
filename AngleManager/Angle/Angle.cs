@@ -25,41 +25,21 @@ namespace AngleManager.Angle
 
         public double Value { get; }
 
-        public double SineValue => Math.Sin(ToRadian());
+        public double SineValue => Math.Sin(this.To<RadianAngle>().Value);
 
-        public double ArcSinValue => Math.Asin(ToRadian());
+        public double ArcSinValue => Math.Asin(this.To<RadianAngle>().Value);
 
-        public double CosValue => Math.Cos(ToRadian());
+        public double CosValue => Math.Cos(this.To<RadianAngle>().Value);
 
-        public double ArcCosValue =>  Math.Acos(ToRadian());
+        public double ArcCosValue =>  Math.Acos(this.To<RadianAngle>().Value);
 
-        public double TanValue => Math.Tan(ToRadian());
+        public double TanValue => Math.Tan(this.To<RadianAngle>().Value);
 
-        public double ArcTanValue => Math.Atan(ToRadian());
+        public double ArcTanValue => Math.Atan(this.To<RadianAngle>().Value);
 
         #endregion
 
         #region Angle Virtual Members
-
-        /// <summary>
-        /// Converts Degree to Radian
-        /// </summary>
-        /// <returns>the radian value</returns>
-        /// <see cref="RadianAngle"/>
-        public virtual double ToRadian()
-        {
-            return Value;
-        }
-
-        /// <summary>
-        /// Converts Radian to Degree
-        /// </summary>
-        /// <returns>the degree value</returns>
-        /// <see cref="DegreeAngle"/>
-        public virtual double ToDegree()
-        {
-            return Value;
-        }
 
         /// <summary>
         /// Validates the Angle Instance 

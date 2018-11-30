@@ -29,17 +29,17 @@
 
         protected override Angle Sum(Angle angle)
         {
-            return new DegreeAngle(Value + angle.ToDegree());
+            return new DegreeAngle(Value + angle.To<DegreeAngle>().Value);
         }
 
         protected override Angle Difference(Angle angle)
         {
-            return new DegreeAngle(Value - angle.ToDegree());
+            return new DegreeAngle(Value - angle.To<DegreeAngle>().Value);
         }
 
         protected override Angle Multiply(Angle angle)
         {
-            return Multiply(angle.ToDegree());
+            return Multiply(angle.To<DegreeAngle>().Value);
         }
 
         protected override Angle Multiply(double angleValue)
@@ -49,7 +49,7 @@
 
         protected override Angle Divide(Angle angle)
         {
-            return Divide(angle.ToDegree());
+            return Divide(angle.To<DegreeAngle>().Value);
         }
 
         protected override Angle Divide(double angleValue)
@@ -63,22 +63,17 @@
 
         protected override int CompareTo(Angle angle)
         {
-            return Value.CompareTo(angle.ToDegree());
+            return Value.CompareTo(angle.To<DegreeAngle>().Value);
         }
 
         protected override Angle Modulus(Angle angle)
         {
-            return new DegreeAngle(Value - (Math.Floor(Value / angle.ToDegree()) * angle.ToDegree()));
+            return new DegreeAngle(Value - (Math.Floor(Value / angle.To<DegreeAngle>().Value) * angle.To<DegreeAngle>().Value));
         }
 
         #endregion
 
         #region Angle Virtual Overrides
-
-        public override double ToRadian()
-        {
-            return ((Math.PI / 180) * Value);
-        }
 
         public override bool IsValid()
         {
@@ -94,14 +89,14 @@
         #region Casting Operations
         public static explicit operator DegreeAngle(RadianAngle angle)
         {
-            return new DegreeAngle(angle.ToDegree());
+            return new DegreeAngle(angle.To<DegreeAngle>().Value);
         }
         #endregion
 
         #region Angle IEquatable Overrides
         public override bool Equals(Angle other)
         {
-            return other != null && 0 == Value.CompareTo(other.ToDegree());
+            return other != null && 0 == Value.CompareTo(other.To<DegreeAngle>().Value);
         }
         #endregion
     }
