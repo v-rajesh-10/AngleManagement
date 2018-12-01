@@ -19,12 +19,15 @@
         #region Casting Operations
         public static explicit operator MathematicalDirection(CompassDirection direction)
         {
+            var convertedCompassValue = (450 - direction.Angle.To<DegreeAngle>().Value) % 360;
+            Angle convertedCompassAngle = new DegreeAngle(convertedCompassValue);
             if (!direction.Angle.GetType().Equals(typeof(DegreeAngle)))
             {
-                // Forced to create an Angle Instance when casting directions to angles...
+                // Forced to create an Angle Instance when casting directions to angles...Hence converting it back to 
+                // previous type...yes..this involves an additional objects creation
+                convertedCompassAngle = convertedCompassAngle.Create(convertedCompassValue, direction.Angle.GetType());
             }
-            var convertedCompassValue = (450 - direction.Angle.To<DegreeAngle>().Value) % 360;
-            return new MathematicalDirection(new DegreeAngle(convertedCompassValue));
+            return new MathematicalDirection(convertedCompassAngle);
         }
         #endregion
     }

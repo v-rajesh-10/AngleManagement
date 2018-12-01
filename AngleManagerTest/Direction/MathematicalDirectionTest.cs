@@ -6,7 +6,7 @@ namespace AngleManagerTest.Direction
     using Shouldly;
 
     [TestClass]
-    public class MathematicalDirectionTest
+    public class MathematicalDirectionTest : AngleTestContext
     {
         #region Constructor Tests
         [TestMethod]
@@ -20,9 +20,9 @@ namespace AngleManagerTest.Direction
 
             // Assert
             result.Angle.ShouldBeSameAs(firstQuadrantAngle);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveXAxis);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.First);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CounterClockwise);
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.First);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
         }
 
         [TestMethod]
@@ -36,9 +36,9 @@ namespace AngleManagerTest.Direction
 
             // Assert
             result.Angle.ShouldBeSameAs(secondQuadrantAngle);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveXAxis);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Second);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CounterClockwise);
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.Second);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
         }
 
         [TestMethod]
@@ -52,9 +52,9 @@ namespace AngleManagerTest.Direction
 
             // Assert
             result.Angle.ShouldBeSameAs(secondQuadrantAngle);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveXAxis);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Third);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CounterClockwise);
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.Third);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
         }
 
         [TestMethod]
@@ -68,9 +68,9 @@ namespace AngleManagerTest.Direction
 
             // Assert
             result.Angle.ShouldBeSameAs(secondQuadrantAngle);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveXAxis);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Fourth);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CounterClockwise);
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.Fourth);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
         }
         #endregion
 
@@ -88,11 +88,30 @@ namespace AngleManagerTest.Direction
             // Assert
             result.Angle.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
             result.Angle.Value.ShouldBe(30);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveXAxis);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.First);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CounterClockwise);
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.First);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
         }
 
+        [TestMethod]
+        public void TestCompassDirectionCastingFromMathematicalDirectionInRadianForAngleInFirstQuadrant()
+        {
+            // Arrange
+            var firstQuadrantAngle = new AngleManager.Angle.RadianAngle(ConvertToRadian(60));
+            CompassDirection mathematicalDirection = new CompassDirection(firstQuadrantAngle);
+
+            //Act
+            var result = (MathematicalDirection)mathematicalDirection;
+
+            // Assert
+            result.Angle.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Angle.Value.ShouldBe(ConvertToRadian(30));
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.First);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
+        }
+
+        [TestMethod]
         public void TestCompassDirectionCastingFromMathematicalDirectionInDegreesForAngleInSecondQuadrant()
         {
             // Arrange
@@ -105,11 +124,30 @@ namespace AngleManagerTest.Direction
             // Assert
             result.Angle.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
             result.Angle.Value.ShouldBe(330);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveXAxis);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Fourth);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CounterClockwise);
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.Fourth);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
         }
 
+        [TestMethod]
+        public void TestCompassDirectionCastingFromMathematicalDirectionInRadiansForAngleInSecondQuadrant()
+        {
+            // Arrange
+            var firstQuadrantAngle = new AngleManager.Angle.RadianAngle(ConvertToRadian(120));
+            CompassDirection mathematicalDirection = new CompassDirection(firstQuadrantAngle);
+
+            //Act
+            var result = (MathematicalDirection)mathematicalDirection;
+
+            // Assert
+            result.Angle.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Angle.Value.ShouldBe(ConvertToRadian(330));
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.Fourth);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
+        }
+
+        [TestMethod]
         public void TestCompassDirectionCastingFromMathematicalDirectionInDegreesForAngleInThirdQuadrant()
         {
             // Arrange
@@ -122,11 +160,30 @@ namespace AngleManagerTest.Direction
             // Assert
             result.Angle.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
             result.Angle.Value.ShouldBe(210);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveXAxis);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Third);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CounterClockwise);
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.Third);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
         }
 
+        [TestMethod]
+        public void TestCompassDirectionCastingFromMathematicalDirectionInRadianForAngleInThirdQuadrant()
+        {
+            // Arrange
+            var firstQuadrantAngle = new AngleManager.Angle.RadianAngle(ConvertToRadian(240));
+            CompassDirection mathematicalDirection = new CompassDirection(firstQuadrantAngle);
+
+            //Act
+            var result = (MathematicalDirection)mathematicalDirection;
+
+            // Assert
+            result.Angle.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Angle.Value.ShouldBe(ConvertToRadian(210), 0.0000000000000005);
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.Third);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
+        }
+
+        [TestMethod]
         public void TestCompassDirectionCastingFromMathematicalDirectionInDegreesForAngleInFourthQuadrant()
         {
             // Arrange
@@ -139,9 +196,27 @@ namespace AngleManagerTest.Direction
             // Assert
             result.Angle.ShouldBeOfType<AngleManager.Angle.DegreeAngle>();
             result.Angle.Value.ShouldBe(130);
-            result.AxisType.ShouldBe(AngleManager.Direction.Direction.Axis.PositiveXAxis);
-            result.QuadrantType.ShouldBe(AngleManager.Direction.Direction.Quadrant.Second);
-            result.MovementType.ShouldBe(AngleManager.Direction.Direction.Movement.CounterClockwise);
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.Second);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
+        }
+
+        [TestMethod]
+        public void TestCompassDirectionCastingFromMathematicalDirectionInRadianForAngleInFourthQuadrant()
+        {
+            // Arrange
+            var firstQuadrantAngle = new AngleManager.Angle.RadianAngle(ConvertToRadian(320));
+            CompassDirection mathematicalDirection = new CompassDirection(firstQuadrantAngle);
+
+            //Act
+            var result = (MathematicalDirection)mathematicalDirection;
+
+            // Assert
+            result.Angle.ShouldBeOfType<AngleManager.Angle.RadianAngle>();
+            result.Angle.Value.ShouldBe(ConvertToRadian(130));
+            result.AxisType.ShouldBe(Direction.Axis.PositiveXAxis);
+            result.QuadrantType.ShouldBe(Direction.Quadrant.Second);
+            result.MovementType.ShouldBe(Direction.Movement.CounterClockwise);
         }
         #endregion
     }
